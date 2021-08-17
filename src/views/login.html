@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif
+    }
+
+    body,
+    html {
+      height: 100%;
+      line-height: 1.8;
+    }
+
+    .w3-bar .w3-button {
+      padding: 16px;
+    }
+  </style>
+
+<body>
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+          <a href="/index/signup" class="w3-bar-item w3-button">SIGN UP</a>
+      </div>
+
+    </div>
+    <div class="container">
+      <h1  style= "color: rgb(22, 111, 167); text-align: center;">Login</h1>
+      <form action="/login/user" method="POST">
+        <div class="form-group">
+          <label for="">Name</label>
+          <input class="form-control" type="email" name="email" placeholder="Email" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="">Password</label>
+          <input class="form-control" type="password" name="password" placeholder="Password" required autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+
+      </form>
+
+    </div>
+
+</body>
+
+</html>

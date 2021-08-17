@@ -1,0 +1,10 @@
+{"message":"Controller : getUser, Request-Body : {}","level":"info"}
+{"message":"Controller : addUser, Request-Body : {}","level":"info"}
+{"message":"ERRROR :  Unprocessable Entity","body":{"message":"The given data is invalid.","errors":{"password":{"message":"The password field is mandatory.","rule":"required"}}},"level":"error","stack":"UnprocessableEntityError: Unprocessable Entity\n    at Object.throw (/home/ubox138/Documents/shopping App/node_modules/koa/lib/context.js:97:11)\n    at Object.validate (/home/ubox138/Documents/shopping App/node_modules/node-input-validator/lib/index.js:68:19)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)"}
+{"message":"Controller : addUser, Error : {\"message\":\"Unprocessable Entity\",\"body\":{\"message\":\"The given data is invalid.\",\"errors\":{\"password\":{\"message\":\"The password field is mandatory.\",\"rule\":\"required\"}}}}","level":"error"}
+{"message":"ERRROR :  Unprocessable Entity","body":{"message":"The given data is invalid.","errors":{"password":{"message":"The password field is mandatory.","rule":"required"}}},"level":"error","stack":"UnprocessableEntityError: Unprocessable Entity\n    at Object.throw (/home/ubox138/Documents/shopping App/node_modules/koa/lib/context.js:97:11)\n    at Object.validate (/home/ubox138/Documents/shopping App/node_modules/node-input-validator/lib/index.js:68:19)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)"}
+{"message":"Controller : addUser, Error : {\"message\":\"Unprocessable Entity\",\"body\":{\"message\":\"The given data is invalid.\",\"errors\":{\"password\":{\"message\":\"The password field is mandatory.\",\"rule\":\"required\"}}}}","level":"error"}
+{"message":"Controller : addUser, Request-Body : {}","level":"info"}
+{"message":"Controller : addUser, Request-Body : {}","level":"info"}
+{"message":"Controller : addproduct, Request-Body : {}","level":"info"}
+{"message":"Controller : addproduct, Request-Body : {}","level":"info"}

@@ -1,0 +1,242 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "TypeScript Boilerplate",
+        "description": "This is typescript boilerplate's API specification.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:3000/api"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books related API"
+        }
+    ],
+    "paths": {
+        "/v1/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get Book API",
+                "description": "Get Book API",
+                "operationId": "getBookById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book Information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/bookInformation"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something went wrong",
+                        "content": {}
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update Book API",
+                "description": "Update Book API",
+                "operationId": "updateBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Book Details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/bookInformation"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "book updated Successfully",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Something went wrong",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "Book Information"
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete Book API",
+                "description": "Delete Book API",
+                "operationId": "deleteBook",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Book Deleted Successfully",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Something went wrong",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/v1/books/": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get All Book API",
+                "description": "Get All Book API",
+                "operationId": "getAllBooks",
+                "responses": {
+                    "200": {
+                        "description": "All Books Information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllBooksInformations"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Something went wrong",
+                        "content": {}
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Add Book API",
+                "description": "Add Book API",
+                "operationId": "addBook",
+                "requestBody": {
+                    "description": "Book Details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/bookInformation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book Added Successfully",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Something went wrong",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "Book Information"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "bookInformation": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "authorName": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "totalPage": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "AllBooksInformations": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "authorName": {
+                            "type": "string"
+                        },
+                        "category": {
+                            "type": "string"
+                        },
+                        "price": {
+                            "type": "number"
+                        },
+                        "totalPage": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "description": "Example value:- Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5MmQwMGJhNTJjYjJjM",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

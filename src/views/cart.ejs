@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Raleway", sans-serif
+  }
+
+  body,
+  html {
+    height: 100%;
+    line-height: 1.8;
+  }
+
+  .w3-bar .w3-button {
+    padding: 16px;
+  }
+</style>
+
+<body>
+
+  <!-- Navbar (sit on top) -->
+  <div>
+    <% include userheader.html %>
+  </div>
+</body>
+
+</html>
+<br> <br> <br>
+<div class="table-data">
+  <h2  style= "color: rgb(22, 111, 167); text-align: center;">Display cart details</h2>
+ 
+  <br>
+  <table  class = "table table-striped" border="1">
+    <thead class="thead-dark"> <tr>
+      <th  scope="col">Product Name</th>
+      <th  scope="col">Description</th>
+      <th  scope="col">Quantity</th>
+      <th  scope="col"> Total Price</th>
+      <th  scope="col">Remove item</th>
+     
+    </tr>
+    </thead>
+    <% usercartitems.forEach(function(usercartitem){ %>
+      <tr>
+        <td scope="row"> <%= usercartitem.productname %> </td>
+        <td scope="row"> <%= usercartitem.description %> </td>
+        <td scope="row"> <%= usercartitem.quantity %> </td>
+        <td  scope="row"> <%= usercartitem.totalprice %> </td>
+        <form action='/removecartitem' method="Post">
+          <td  scope="row"><button type="submit" name="cartid" value= <%= usercartitem.cartid %>> Remove Item</button></td>
+        </form>
+       
+      </tr>
+      <% } )%>
+
+  </table>
+  <br>
+  <div></div>
+  <div style= "margin-left: 39%;">
+  <form action="/login/emptycart" method="POST"> 
+    <button type="submit" name="cartid" value =<%= cartids %> style= "margin-left: 40%;" > Empty Cart</button>
+    </form>
+    </div><br>
+    <div style= "margin-left: 40%;">
+    <form action='/order' method="Post">
+      <td  scope="row"><button type="submit" name="cartids" value =<%= cartids %> > Order</button></td>
+    </form>
+  </div>
+ 
+</div>
