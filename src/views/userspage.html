@@ -5,7 +5,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+<script  type="text/javascript"> 
+  function preventBack() {
+     window.history.forward(); 
+     } setTimeout("preventBack()", 0); 
+     window.onunload = function () { null };
+ </script>
+ <style>
   body,
   h1,
   h2,
@@ -16,21 +22,33 @@
     font-family: "Raleway", sans-serif
   }
 
+  body,
+  html {
+    height: 100%;
+    line-height: 1.8;
+    background-color: #FAACA8;
+    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+  }
+  
   .w3-bar .w3-button {
     padding: 16px;
   }
 </style>
-
+<title>Ordering App</title>
 <body>
 
   <!-- Navbar (sit on top) -->
   <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
+      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART <img src="/images/index1.jpeg" style="width:20px;height:20px;">
+    </a>
+     
       <!-- Right-sided navbar links -->
       <div class="w3-right w3-hide-small">
         <a href="/login/listproducts" class="w3-bar-item w3-button">PRODUCT </a>
-        <a href="/login/orders" class="w3-bar-item w3-button">MY ORDERS </a>
+        <a href="/login/orders" class="w3-bar-item w3-button">MY ORDERS <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+          <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+        </svg> </a>
         <a href="/login/cart" class="w3-bar-item w3-button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
           <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
         </svg></a>

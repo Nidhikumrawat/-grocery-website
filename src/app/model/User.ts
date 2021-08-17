@@ -2,7 +2,7 @@ export class User {
     id: number
     name: string
     email: string
-    phoneno: number
+    phone_no: number
     address: string
     password: string
 
@@ -10,7 +10,7 @@ export class User {
         this.id = 0
         this.name = null
         this.email = null
-        this.phoneno = 0
+        this.phone_no = 0
         this.address = null
         this.password = null
 
@@ -28,8 +28,8 @@ export class User {
         this.email = email
     }
 
-    setPhoneno(phoneno: number) {
-        this.phoneno = phoneno
+    setPhoneno(phone_no: number) {
+        this.phone_no = phone_no
     }
     setAddress(address: string){
         this.address = address
@@ -52,7 +52,7 @@ export class User {
     }
 
     getPhoneno(): number {
-        return this.phoneno
+        return this.phone_no
     }
 
     getPassword(): string {

@@ -1,191 +1,121 @@
 import { Context } from 'koa'
-import logger from '../../logger'
-import httpConstants from '../constant/httpConstants'
-import orderService from '../service/OrderService'
-import productService from '../service/ProductService'
-import { Product } from '../model/Product'
+import { User } from '../model/User'
+import { Order } from '../model/Order'
 import { Cart } from '../model/Cart'
 import { OrderDetail } from '../model/OrderDetail'
-import apiErrorHandler from '../utils/ApiErrorHandler'
-import cartService from '../service/CartService'
-import orderDetailsService from "../service/OrderDetailsService";
+import logger from '../../logger'
+import httpConstants from '../constant/httpConstants'
 import userService from '../service/UserService'
-import { User } from '../model/User'
+import orderService from '../service/OrderService'
+import cartService from '../service/CartService'
+import apiErrorHandler from '../utils/ApiErrorHandler'
+import orderDetailsService from "../service/OrderDetailsService";
 const orderid = require('order-id')('mysecret');
-
-
 
 class OrderController {
     constructor() { }
 
-    async addOrder(ctx: Context) {
-        try {
-            let cartid: string = ctx.request.body.cartids;
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail === null)) {
-                await ctx.render('login')
-            } else {
-                let carts = [];
-                const cartids = cartid.split(",");
-                for (let i = 0; i < cartids.length; i++) {
-                    carts.push(Number(cartids[i]))
-                }
-                let cartitems: Array<Cart> = await cartService.getCartItemById(carts)
-                let user: User = await userService.getUser(useremail)
-                for (let i = 0; i < cartitems.length; i++) {
-                    let item = cartitems[i];
-                    const uniqueorderid: string = orderid.generate();
-                    let productid: number = item.productid;
-                    let cartid: number = item.id;
-                    let product: Product = await productService.getProductByProductId(productid)
-
-                    interface orderstypes {
-                        email: string;
-                        productid: number;
-                        orderid: string;
-                    }
-                    let orderDetail: orderstypes = {
-                        email: useremail,
-                        productid: productid,
-                        orderid: uniqueorderid
-                    }
-                    interface orderdetailstypes {
-                        orderid: string;
-                        name: string;
-                        email: string;
-                        phoneno: number;
-                        address: string;
-                        productname: string;
-                        description: string;
-                        totalprice: number;
-                        price: number;
-                        quantity: number;
-                    }
-                    let orderDetails: orderdetailstypes = {
-                        orderid: uniqueorderid,
-                        name: user.name,
-                        email: useremail,
-                        phoneno: user.phoneno,
-                        address: user.address,
-                        productname: product.name,
-                        description: product.description,
-                        totalprice: item.totalprice,
-                        price: product.price,
-                        quantity: (item.totalprice) / (product.price)
-                    }
-                    await orderService.addOrder(orderDetail)
-                    await orderDetailsService.addOrderDetails(orderDetails)
-                    await cartService.deleteItemFromCartById(cartid)
-                }
-                ctx.status = httpConstants.HTTP_CREATED
-                await ctx.render('placedorder')
-            }
-        }
-        catch (error) {
-            apiErrorHandler.errorHandler(error, ctx);
-            logger.error(`Controller : addOrder, Error : ${JSON.stringify(error)}`)
-        }
-    }
-
     async getAllOrderForUser(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail === null)) {
-                await ctx.render('login')
-            } else {
-                let orders: Array<OrderDetail> = await orderDetailsService.getAllOrders(ctx)
-                ctx.status = httpConstants.HTTP_SUCCESS_OK
-                await ctx.render('myorders', { allorders: orders });
-            }
+            let userEmail: string = ctx.cookies.get("user-detail");
+            let user: User = await userService.getUsers(userEmail)
+            let userId = user.id
+            let userorderitems: Array<Order> = await orderService.getUserOrders(userId)
+            ctx.status = httpConstants.HTTP_SUCCESS_OK
+            await ctx.render('myorders', { userorderitems: userorderitems });
         } catch (error) {
             apiErrorHandler.errorHandler(error, ctx);
             logger.error(`Controller : getAllOrderForUser, Error : ${JSON.stringify(error)}`)
         }
     }
 
+    async orderListForAdmin(ctx: Context) {
+        try {
+            let orderDetails: Array<Order> = await orderService.getOrders(ctx)
+            ctx.status = httpConstants.HTTP_SUCCESS_OK
+            await ctx.render('veiwusersorder', { title: 'display', orderdetails: orderDetails });
+        } catch (error) {
+            apiErrorHandler.errorHandler(error, ctx);
+            logger.error(`Controller : getAllOrdersDetail, Error : ${JSON.stringify(error)}`)
+        }
+    }
+
+
     async updateOrderStatus(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail == "null")) {
-                await ctx.render('login')
+            let updatedCount = await orderService.updateOrderStatus(ctx)
+            if (!updatedCount) {
+                ctx.status = httpConstants.HTTP_CONFLICT
+                ctx.body = { error: 'data does not exist.' }
             } else {
-                let orderid: number = ctx.request.body.orderid;
-                let orderDetails: OrderDetail = await orderDetailsService.getOrderById(orderid)
-                interface orderdetailstypes {
-                    name: string;
-                    email: string;
-                    phoneno: number;
-                    address: string;
-                    productname: string;
-                    description: string;
-                    totalprice: number;
-                    orderid: string;
-                    status: string;
-                    price: number;
-                    quantity: number;
-                    createdAt: Date;
-                }
-                let updateStatus: orderdetailstypes = {
-                    name: orderDetails.name,
-                    email: orderDetails.email,
-                    phoneno: orderDetails.phoneno,
-                    address: orderDetails.address,
-                    productname: orderDetails.productname,
-                    description: orderDetails.description,
-                    totalprice: orderDetails.totalprice,
-                    orderid: orderDetails.orderid,
-                    status: ctx.request.body.status,
-                    price: orderDetails.price,
-                    quantity: orderDetails.quantity,
-                    createdAt: orderDetails.createdAt
-                }
-                let updatedCount = await orderDetailsService.updateOrderStatus(updateStatus, orderDetails.id)
-                if (!updatedCount) {
-                    ctx.status = httpConstants.HTTP_CONFLICT
-                    ctx.body = { error: 'data does not exist.' }
-                } else {
-                    ctx.status = httpConstants.HTTP_SUCCESS_OK
-                    await ctx.render('adminpage')
-                }
+                ctx.status = httpConstants.HTTP_SUCCESS_OK
+                await ctx.redirect('orderlist')
             }
         } catch (error) {
-
+            apiErrorHandler.errorHandler(error, ctx);
+            logger.error(`Controller : updateOrderStatus, Error : ${JSON.stringify(error)}`)
         }
     }
 
     async veiwOrderDetails(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail == "null")) {
-                await ctx.render('login')
-            } else {
-                let orderid: number = ctx.request.body.orderid;
-                let orderDetails: OrderDetail = await orderDetailsService.getOrderById(orderid)
-                await ctx.render('adminorderdetails', { orderDetails: orderDetails })
-            }
+            let { orderId, id } = ctx.request.body
+            let order: Order = await orderService.getOrder(id)
+            let userId = order.user_id;
+            let user: User = await userService.getUserById(userId)
+            let orderDetails: Array<OrderDetail> = await orderDetailsService.getUserOrdersDetails(orderId)
+            await ctx.render('adminorderdetails', { orderDetails: orderDetails, userDetails: user, orderId: orderId, order: order })
         } catch (error) {
-
+            apiErrorHandler.errorHandler(error, ctx);
+            logger.error(`Controller : veiwOrderDetails, Error : ${JSON.stringify(error)}`)
         }
     }
 
     async viewUserOrderDetail(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail == "null")) {
-                await ctx.render('login')
-            } else {
-                let orderid = ctx.request.body.orderid;
-                let orderDetails: OrderDetail = await orderDetailsService.getOrderById(orderid)
-                console.log(orderDetails);
-                await ctx.render('userordersDetail', { orderDetails: orderDetails })
-            }
+            let { orderId, id } = ctx.request.body
+            let order: Order = await orderService.getOrder(id)
+            let userId = order.user_id;
+            let user: User = await userService.getUserById(userId)
+            let orderDetails: Array<OrderDetail> = await orderDetailsService.getUserOrdersDetails(orderId)
+            await ctx.render('userordersDetail', { orderDetails: orderDetails, userDetails: user, userOrderDetails: order, orderId: orderId })
         } catch (error) {
-
+            apiErrorHandler.errorHandler(error, ctx);
+            logger.error(`Controller : viewUserOrderDetail, Error : ${JSON.stringify(error)}`)
         }
     }
 
+    async addOrder(ctx: Context) {
+        try {
+            let userEmail: string = ctx.cookies.get("user-detail");
+            let user: User = await userService.getUsers(userEmail)
+            let cartitems: Array<Cart> = await cartService.getCartItemByUserId(user.id)
+            const uniqueOrderId: string = orderid.generate();
+            let OrderDetail = []
+            for (let i = 0; i < cartitems.length; i++) {
+                let cartData = {
+                    quantity: cartitems[i].quantity,
+                    productId: Number(cartitems[i].product_id),
+                    uniqueorderid: uniqueOrderId,
+                }
+                OrderDetail.push(cartData)
+            }
+            let totalorderamount = await orderDetailsService.addOrderDetails(OrderDetail)
+            let orderDetail = {
+                user_id: user.id,
+                order_id: uniqueOrderId,
+                total_order_amount: totalorderamount
+            }
+            await orderService.addOrder(orderDetail)
+            await cartService.deleteFromCart(user.id)
+            ctx.status = httpConstants.HTTP_CREATED
+            await ctx.render('placedorder')
+        }
+        catch (error) {
+            await ctx.redirect('login/cart')
+        }
+    }
 }
 
 const orderController: OrderController = new OrderController()
 export default orderController
-

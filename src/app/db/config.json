@@ -2,25 +2,25 @@
   "development": {
     "username": "postgres",
     "password": "pallavi",
-    "database": "library",
+    "database": "ordering_app",
     "host": "192.168.1.39",
     "port": "3306",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "pallavi",
-    "database": "library",
+    "database": "ordering_app",
     "host": "192.168.1.39",
     "port": "3306",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "pallavi",
-    "database": "library",
+    "database": "ordering_app",
     "host": "192.168.1.39",
     "port": "3306",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }

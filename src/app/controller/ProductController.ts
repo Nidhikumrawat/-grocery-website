@@ -1,37 +1,27 @@
 import { Context } from 'koa'
+import { Product } from '../model/Product'
 import logger from '../../logger'
 import httpConstants from '../constant/httpConstants'
 import productService from '../service/ProductService'
 import apiErrorHandler from '../utils/ApiErrorHandler'
-import { Product } from '../model/Product'
-
-
+import userValidation from '../validation/custom/Validation'
 
 class ProductController {
     constructor() { }
 
     async addProduct(ctx: Context) {
-        let useremail: string = ctx.cookies.get("user-detail");
-        if ((useremail === undefined) || (useremail === null)) {
-            await ctx.render('login')
-        } else {
-            await ctx.render('addproduct');
-        }
+        await ctx.render('addproduct', { message: "" });
     }
 
     async getAllProducts(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail === null)) {
-                await ctx.render('login')
+            let userEmail: string = ctx.cookies.get("user-detail");
+            let products: Array<Product> = await productService.getAllProducts(ctx)
+            ctx.status = httpConstants.HTTP_SUCCESS_OK
+            if (userEmail == process.env.ADMIN_EMAIL) {
+                await ctx.render('productpage', { productdata: products });
             } else {
-                let products: Array<Product> = await productService.getAllProducts(ctx)
-                ctx.status = httpConstants.HTTP_SUCCESS_OK
-                if (useremail == "patilpallavi059@gmail.com") {
-                    await ctx.render('productpage', { productdata: products });
-                } else {
-                    await ctx.render('userproductpage', { productdata: products });
-                }
+                await ctx.render('userproductpage', { productdata: products });
             }
         } catch (error) {
             apiErrorHandler.errorHandler(error, ctx);
@@ -39,39 +29,24 @@ class ProductController {
         }
     }
 
-    async getAllProductsForAdmin(ctx: Context) {
-        try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail == "null")) {
-                await ctx.render('login')
-            } else {
-                let products: Array<Product> = await productService.getAllProducts(ctx)
-                await ctx.render('productpage', { productdata: products });
-            }
-        } catch (error) {
-            apiErrorHandler.errorHandler(error, ctx);
-            logger.error(`Controller : getAllProductsForAdmin, Error : ${JSON.stringify(error)}`)
-        }
-    }
 
     async addProducts(ctx: Context) {
         try {
-            let useremail: string = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail == "null")) {
-                await ctx.render('login')
+            let validation = await userValidation.addProduct(ctx)
+            if (!validation) {
+                await ctx.render('addproduct', { message: "Invalid Product Details Format" });
             } else {
-                logger.info(`Controller : addproduct, Request-Body : ${JSON.stringify(ctx.params)}`)
+                logger.info(`Controller : addProduct, Request-Body : ${JSON.stringify(ctx.params)}`)
                 await productService.addProduct(ctx)
                 ctx.status = httpConstants.HTTP_CREATED;
-                await ctx.render('adminpage');
+                await ctx.render('addproduct', { message: "Product Added Successfully" });
             }
         } catch (error) {
             apiErrorHandler.errorHandler(error, ctx);
             logger.error(`Controller : addProduct, Error : ${JSON.stringify(error)}`)
+            await ctx.render('addproduct', { message: "Enter Correct Details" });
         }
     }
-
 }
-
 const productController: ProductController = new ProductController()
 export default productController

@@ -1,44 +1,44 @@
 export class Cart {
     id: number
-    email: string
-    productid: number
-    totalprice:number
+    user_id: number
+    product_id: number
+    quantity:number
 
     constructor() {
         this.id = 0
-        this.email = null
-        this.productid = 0
-        this.totalprice = 0
+        this.user_id = 0
+        this.product_id = 0
+        this.quantity = 0
     }
 
     setId(id: number) {
         this.id = id
     }
 
-    setEmail(email: string) {
-        this.email = email
+    setUserId(user_id: number) {
+        this.user_id = user_id
     }
 
-    setProductId(productid: number) {
-        this.productid = productid
+    setProductId(product_id: number) {
+        this.product_id = product_id
     }
   
-    setTotalPrice(totalprice:number){
-        this.totalprice=totalprice
+    setQuantity(quantity:number){
+        this.quantity=quantity
     }
 
     getId(): number {
         return this.id
     }
 
-    getEmail(): string {
-        return this.email
+    getUserId(): number {
+        return this.user_id
     }
 
     getProductId(): number {
-        return this.productid
+        return this.product_id
     }
-    getTotalPrice():number{
-        return this.totalprice
+    getQuantity():number{
+        return this.quantity
     }
 }

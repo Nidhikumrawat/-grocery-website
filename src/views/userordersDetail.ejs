@@ -2,40 +2,62 @@
     <% include userheader.html %>
   </div>
   <br><br><br><br>
- 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-  <div class="card">
+  <script  type="text/javascript"> 
+    function preventBack() {
+       window.history.forward(); 
+       } setTimeout("preventBack()", 0); 
+       window.onunload = function () { null };
+   </script>
+   <style>
 
+    
+    body, .card{
+      height: 100%;
+      line-height: 1.8;
+    background-color: #FAACA8;
+    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+    }
+   
+    </style>
+  <div class="card">
     <div class="title" style= "color: rgb(10, 118, 185);"><strong>Purchase Reciept</strong></div>
     <div class="info">
         <div class="row">
-            <div class="col-7"> <span id="heading" >Date</span><br> <span id="details"><%= orderDetails.createdAt  %> </span> </div>
-            <div class="col-5 pull-right"> <span id="heading">Order No.</span><br> <span id="details"><%= orderDetails.orderid  %> </span> </div>
+            <div class="col-7"> <span id="heading">Date</span><br> <span id="details"><%= userOrderDetails.createdAt  %> </span> </div>
+            <div class="col-5 pull-right"> <span id="heading">Order No.</span><br> <span id="details"><%= orderId  %> 
+               </span> </div>
         </div>
         <div>
           <br>
           <div><span id="heading" style= "color: rgb(10, 118, 185);"><strong>User Details</strong></span><br> <span id="details"></span>
             <div>
-              <span>Name :</span> <span><%= orderDetails.name  %> </span><br>
-              <span>Email Id :</span> <span><%= orderDetails.email  %> </span><br>
-              <span>Contact No :</span> <span><%= orderDetails.phoneno  %> </span><br>
-              <span>Address :</span> <span><%= orderDetails.address  %> </span><br>
+              <span>Name :</span> <span><%= userDetails.name  %> </span><br>
+              <span>Email Id :</span> <span><%= userDetails.email  %> </span><br>
+              <span>Contact No :</span> <span><%= userDetails.phone_no  %> </span><br>
+              <span>Address :</span> <span><%= userDetails.address  %> </span><br>
             </div>                 
           </div>
           <br>
-          <div><span id="heading" style= "color: rgb(10, 118, 185);"><strong>Product Details</strong></span><br> <span id="details"></span>
-            <span class="col-5 pull-right"> <span id="heading">Order Status.</span><br> <span id="details"><%= orderDetails.status  %> </span> </span>
+          <div><span id="heading" style= "color: rgb(185, 95, 10);"><strong>Order Products</strong></span><br> <span id="details"></span>
+          <span class="col-5 pull-right"> <span id="heading">Order Status.</span><br> <span id="details"><%= userOrderDetails.status  %> </span> </span>
+          <% orderDetails.forEach(function(orderDetails){ %>
+            <div><span id="heading" style= "color: rgb(10, 118, 185);"><strong>Product Details</strong></span><br> <span id="details"></span>
+           
+            
             <div>
-              <span>Name :</span> <span><%= orderDetails.productname  %> </span><br>
-              <span>Price :</span> <span><%= orderDetails.price  %> </span><br>
-              <span>Quantity :</span> <span><%= orderDetails.quantity  %> </span><br>
-              <span>Total Price :</span> <span><%= orderDetails.totalprice  %> </span><br>
-              
-            </div>                 
+              <span>Name :</span> <span><%= orderDetails.productName  %> </span><br>
+              <span>Description :</span> <span><%= orderDetails.description  %> </span><br>
+              <span>Price/item :</span> <span><%= orderDetails.price  %> </span><br>
+             
+            </div>  
+            <% } )%>
+            <br>
+            <span style="color: rgb(238, 127, 37); "><strong > Total Price :</strong> </span> <span><%= userOrderDetails.total_order_amount  %> </span><br>
           </div>
         </div>
     </div>
   
 </div>
-<br><br>
+<br><br><br><br><br>

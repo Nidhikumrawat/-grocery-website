@@ -1,3 +1,74 @@
-<div>
-    <% include signup.html %>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <title>Ordering App</title>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script  type="text/javascript"> 
+    function preventBack() {
+       window.history.forward(); 
+       } setTimeout("preventBack()", 0); 
+       window.onunload = function () { null };
+   </script>
+  <style>
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  
+  body, html {
+    height: 100%;
+    line-height: 1.8;
+    background-color: #ffcfdf;
+background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+  }
+  .w3-bar .w3-button {
+    padding: 16px;
+  }
+  
+  </style>
+<body>
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">       
+         <a href="/index/login" class="w3-bar-item w3-button">LOGIN </a>
+        </div>
+      
+    </div>
+  <div class="container" style="width: 500px;height:600px;">
+    <% if(message.length){ %> 
+      <div style="color: brown; text-align: center;font-size:large ;"><%= message %> </div>
+      <% } %> 
+    <h1  style= "color: rgb(22, 111, 167); text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+      <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+      <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+    </svg> Signup</h1>
+    <form action="/signup/adduser" method="POST">
+      <div class="form-group">
+        <label for="">Name*</label>
+        <input class="form-control" type="text" name="name">
+      </div>
+      <div class="form-group">
+        <label for="">Email*</label>
+        <input class="form-control" type="email"  name="email" >
+      </div>
+      <div class="form-group">
+        <label for="">Phone No*</label>
+        <input class="form-control" type="number" name="phoneno" >
+      </div>
+      <div class="form-group">
+        <label for="">Address*</label>
+        <input class="form-control" type="text"  name="address">
+      </div>
+     
+      <button class="btn btn-primary" type="submit" >SignUp</button>
+    </form>
   </div>
+
+</body>
+
+</html>

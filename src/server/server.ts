@@ -9,14 +9,12 @@ import helmet from 'koa-helmet'
 import { Middleware } from 'koa-compose'
 import http2 from 'http2'
 import render from 'koa-ejs';
-import fs from 'fs'
 import path from 'path'
 import errorMiddleware from '../app/core/middleware/ErrorMiddleware'
 import config from '../resources/config'
 import routes from '../app/routes'
-import { Context } from 'vm'
 const niv = require('node-input-validator');
-const koaBody = require('koa-body');
+
 
 
 const app: Koa = new Koa()
@@ -46,6 +44,7 @@ render(app, {
     cache: false,
     debug: false
 });
+app.use(serve(path.join(__dirname,'../public')));
 
 
 routes(app)

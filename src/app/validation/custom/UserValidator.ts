@@ -5,6 +5,17 @@ import joiValidator from '../joi/validator';
 export class UserValidator {
     constructor() { }
 
+    async addUser(ctx: Context) {
+        joiValidator.joiValidation(ctx.request.body, UserValidationSchema.addUserSchema)
+        let response = {
+            isValid: true,
+            status: httpConstants.HTTP_SUCCESS_OK,
+            data: {}
+        }
+
+        return response
+    }
+    
     async getUser(ctx: Context) {
         //joi validation for request
         await joiValidator.joiValidation(ctx.params, UserValidationSchema.getUserSchema);
@@ -18,16 +29,7 @@ export class UserValidator {
         return response
     }
 
-    async addUser(ctx: Context) {
-        joiValidator.joiValidation(ctx.request.body, UserValidationSchema.addUserSchema)
-        let response = {
-            isValid: true,
-            status: httpConstants.HTTP_SUCCESS_OK,
-            data: {}
-        }
-
-        return response
-    }
+   
 
     async updateUser(ctx: Context) {
         joiValidator.joiValidation(ctx.request.body, UserValidationSchema.updateUserSchema)
@@ -59,6 +61,12 @@ export class UserValidator {
         }
 
         return response
+    }
+    async checkUser(ctx: Context) {
+        let useremail: string = ctx.cookies.get("user-detail");
+        if ((useremail === undefined) || (useremail === null)) {
+            await ctx.render('login')
+        }
     }
 }
 

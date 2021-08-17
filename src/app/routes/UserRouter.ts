@@ -4,75 +4,72 @@ import productController from '../controller/ProductController'
 import orderController from '../controller/OrderController'
 import connectController from '../controller/ConnectController'
 import cartController from '../controller/CartController'
-import imageController from '../controller/ImageController';
-import koaBody = require('koa-body')
-
+import authentication from '../core/middleware/Authentication'
 
 const userRouterManager: RouterManager = new RouterManager('/')
 
-userRouterManager.get('index/login', userController.login)
+userRouterManager.get('index', userController.getIndexPage)
 
-userRouterManager.get('index/signup', userController.signup)
+userRouterManager.get('index/signup',userController.signupPage)
 
-userRouterManager.get('index', userController.index)
+userRouterManager.get('index/login', userController.loginPage)
 
-userRouterManager.get('user', userController.users)
+userRouterManager.post('signup/adduser',authentication.signupUser,authentication.checkUser, userController.addUser)
 
-userRouterManager.get('admin', userController.admin)
+userRouterManager.post('login/user', authentication.loginUser,userController.validateUser)
+ 
+userRouterManager.post('index/contact', connectController.addComment)
+
+// User Routes
+userRouterManager.get('user', authentication.authUser,userController.users)
+
+userRouterManager.get('login/updateuser', authentication.authUser,userController.updateUser)
+
+userRouterManager.get('login/orders',authentication.authUser,orderController.getAllOrderForUser)
+
+userRouterManager.post('login/addtocart',authentication.authUser,cartController.addToCart)
+
+userRouterManager.get('login/listproducts',authentication.authUser ,productController.getAllProducts)
+
+userRouterManager.post('login/removecartitem', authentication.authUser, cartController.removeCartItem)
+
+userRouterManager.post('login/updateuserdata', authentication.authUser, userController.updateUserData)
+
+userRouterManager.post('order', authentication.authUser, orderController.addOrder)
+
+userRouterManager.post('login/viewDetails',authentication.authUser,orderController.viewUserOrderDetail)
+
+userRouterManager.get('login/cart',authentication.authUser, cartController.getAllCartItems)
+
+userRouterManager.post('login/emptycart',authentication.authUser,cartController.emptyCart)
 
 userRouterManager.get('logout',userController.logout)
 
-userRouterManager.post('signup/adduser', userController.addUser)
+// Admin Routes
+userRouterManager.get('admin/addproduct', authentication.authUser,productController.addProduct)
 
-userRouterManager.post('login/user', userController.validateUser)
+userRouterManager.post('admin/addProduct',authentication.authUser,productController.addProducts)
 
-userRouterManager.get('login/updateuser', userController.updateUser)
+userRouterManager.get('admin/adduser', authentication.authUser, userController.addUserPage)
+
+userRouterManager.post('admin/useradded',authentication.authUser,authentication.signupUser,authentication.checkUser, userController.addUser)
+
+userRouterManager.get('admin/userdetails',authentication.authUser, userController.listAllUsers)
+
+userRouterManager.get('admin', authentication.authUser,userController.admin)
+
+userRouterManager.get('admin/display',authentication.authUser, productController.getAllProducts)
+
+userRouterManager.get('admin/orderlist',authentication.authUser, orderController.orderListForAdmin)
+
+userRouterManager.post('admin/updatestatus',authentication.authUser, orderController.updateOrderStatus)
+
+userRouterManager.post('admin/viewDetails',authentication.authUser,orderController.veiwOrderDetails)
+
+userRouterManager.get('admin/feedback', authentication.authUser, connectController.getAllFeedbacks)
 
 userRouterManager.get('admin/logout',userController.logout)
 
-userRouterManager.post('admin/useradded', userController.addUser)
-
-userRouterManager.get('admin/adduser', userController.addUserPage)
-
-userRouterManager.get('admin/userdetails',userController.listAllUsers)
-
-userRouterManager.post('login/updateuserdata', userController.updateUserData)
-
-userRouterManager.get('admin/addproduct', productController.addProduct)
-
-userRouterManager.post('admin/addProduct',productController.addProducts)
-
-userRouterManager.get('admin/display', productController.getAllProductsForAdmin)
-
-userRouterManager.get('login/listproducts', productController.getAllProducts)
-
-userRouterManager.post('login/addtocart', cartController.addToCart)
-
-userRouterManager.post('removecartitem', cartController.removeCartItem)
-
-userRouterManager.get('login/cart', cartController.getAllCartItems)
-
-userRouterManager.get('admin/orderlist', cartController.orderListForAdmin)
-
-userRouterManager.post('login/emptycart',cartController.emptyCart)
-
-userRouterManager.get('login/orders',orderController.getAllOrderForUser)
-
-userRouterManager.post('admin/updatestatus',orderController.updateOrderStatus)
-
-userRouterManager.post('admin/viewDetails',orderController.veiwOrderDetails)
-
-userRouterManager.post('login/viewDetails',orderController.viewUserOrderDetail)
-
-userRouterManager.post('order', orderController.addOrder)
-
-userRouterManager.get('admin/feedback',connectController.getAllFeedbacks)
-
-userRouterManager.post('index/contact', connectController.addComment)
-
-userRouterManager.get('image',imageController.getpage)
-userRouterManager.post('imagedata', koaBody({ patchNode: true, patchKoa: true, multipart: true }),imageController.postimage)
-userRouterManager.get('demo',imageController.demo)
-
 export default userRouterManager
+
 

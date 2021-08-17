@@ -2,21 +2,15 @@ import { Context } from 'koa'
 import library from '../db/entity/library'
 import { Connect } from '../model/Connect';
 
-
 class ConnectService {
   constructor() { }
 
   async addComment(ctx: Context) {
-    let name: string = ctx.request.body.name
-    let email: string = ctx.request.body.email
-    let subject: string = ctx.request.body.subject
-    let message: number = ctx.request.body.message
-
     await library.Connect.create({
-      name: name,
-      email: email,
-      subject: subject,
-      message: message,
+      name: ctx.request.body.name,
+      email: ctx.request.body.email,
+      subject: ctx.request.body.subject,
+      message: ctx.request.body.message,
     })
   }
 
@@ -37,7 +31,6 @@ class ConnectService {
     return connects
   }
 }
-
 
 let connectService: ConnectService = new ConnectService()
 export default connectService

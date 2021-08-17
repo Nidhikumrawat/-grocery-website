@@ -1,10 +1,10 @@
 import { Context } from 'koa'
+import { Connect } from '../model/Connect'
 import logger from '../../logger'
 import httpConstants from '../constant/httpConstants'
 import connectService from '../service/ConnectService'
 import connectValidator from '../validation/custom/ConnectValidator'
 import apiErrorHandler from '../utils/ApiErrorHandler'
-import { Connect } from '../model/Connect'
 
 class ConnectController {
     constructor() { }
@@ -29,13 +29,8 @@ class ConnectController {
 
     async getAllFeedbacks(ctx: Context) {
         try {
-            let useremail = ctx.cookies.get("user-detail");
-            if ((useremail === undefined) || (useremail === null)) {
-                await ctx.render('login')
-            } else {
-                let feedbacks: Array<Connect> = await connectService.getAllFeedbacks(ctx)
-                await ctx.render('feedbacks', { feedbacks: feedbacks })
-            }
+            let feedbacks: Array<Connect> = await connectService.getAllFeedbacks(ctx)
+            await ctx.render('feedbacks', { feedbacks: feedbacks })
         } catch (error) {
             apiErrorHandler.errorHandler(error, ctx);
             logger.error(`Controller : getAllfeedbacks, Error : ${JSON.stringify(error)}`)

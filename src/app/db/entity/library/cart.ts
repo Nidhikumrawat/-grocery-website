@@ -6,22 +6,22 @@ import {
 } from 'sequelize';
 
 export class Cart extends Model {
-    email?: string;
-    productid?: number;
-    totalprice?: number;
+    user_id?: number;
+    product_id?: number;
+    quantity?: number;
 }
 
 export default (sequelize: Sequelize): typeof Cart => {
     Cart.init({
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        productid: {
+        user_id: {
             type: DataTypes.NUMBER,
             allowNull: false
         },
-        totalprice: {
+        product_id: {
+            type: DataTypes.NUMBER,
+            allowNull: false
+        },
+        quantity: {
             type: DataTypes.NUMBER,
             allowNull: false
         }

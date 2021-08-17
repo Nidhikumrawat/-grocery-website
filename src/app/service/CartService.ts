@@ -2,73 +2,52 @@ import { Context } from 'koa'
 import { Op } from 'sequelize';
 import library from '../db/entity/library'
 import { Cart } from '../model/Cart';
+import { User } from '../model/User';
+import userService from './UserService';
 
 class CartService {
     constructor() { }
-
-    async addOrderToCart(order) {
-        console.log(order);
-        await library.Cart.create({
-            email: order.email,
-            productid: order.productid,
-            totalprice: order.totalprice,
-        })
+    // service to add in cart
+    async addOrderToCart(ctx: Context) {
+        let userEmail:string = ctx.cookies.get("user-detail");
+        let userData: User = await userService.getUsers(userEmail)
+        let cartData = {
+            user_id: userData.id,
+            product_id: ctx.request.body.productid,
+            quantity: ctx.request.body.quantity
+        }
+        await library.Cart.create(cartData)
     }
 
-    async getCartItemByUserId(useremail): Promise<Array<Cart>> {
+    async getCartItemByUserId(userId): Promise<Array<Cart>> {
         let cartModels = await library.Cart.findAll({
             where: {
-                email: useremail
+                user_id: userId
             }
         })
-
         let carts: Array<Cart> = new Array<Cart>()
-
         for (let cartModel of cartModels) {
             let cart: Cart = new Cart()
             cart.setId(cartModel.id)
-            cart.setEmail(cartModel.email)
-            cart.setProductId(cartModel.productid)
-            cart.setTotalPrice(cartModel.totalprice)
+            cart.setUserId(cartModel.user_id)
+            cart.setProductId(cartModel.product_id)
+            cart.setQuantity(cartModel.quantity)
             carts.push(cart)
         }
         return carts
     }
 
-    // service for deleting the book
-    async deleteFromCart(cartid) {
+    async deleteFromCart(userId) {
         let item = await library.Cart.destroy({
             where: {
-                id: {
-                    [Op.in]: cartid
-                }
+                user_id: userId
             }
         })
     }
 
-    async getCartItemById(cartid): Promise<Array<Cart>> {
-        let cartModels = await library.Cart.findAll({
-            where: {
-                id: {
-                    [Op.in]: cartid
-                }
-            }
-        })
-
-        let carts: Array<Cart> = new Array<Cart>()
-
-        for (let cartModel of cartModels) {
-            let cart: Cart = new Cart()
-            cart.setId(cartModel.id)
-            cart.setEmail(cartModel.email)
-            cart.setProductId(cartModel.productid)
-            cart.setTotalPrice(cartModel.totalprice)
-            carts.push(cart)
-        }
-        return carts
-    }
-
-    async deleteItemFromCartById(cartid) {
+    //Delete Cart Item By CartId
+    async deleteItemFromCart(ctx: Context) {
+        let cartid = ctx.request.body.cartid;
         let item = await library.Cart.destroy({
             where: {
                 id: cartid
@@ -77,8 +56,5 @@ class CartService {
     }
 }
 
-
 let cartService: CartService = new CartService()
 export default cartService
-
-

@@ -1,33 +1,16 @@
 import { Context } from 'koa'
-import { Sequelize } from "sequelize";
-const { Op } = require("sequelize");
 import library from '../db/entity/library'
 import { Product } from '../model/Product';
-
 
 class ProductService {
     constructor() { }
     async addProduct(ctx: Context) {
-        let name: string = ctx.request.body.name
-        let description: string = ctx.request.body.description
-        let price: number = ctx.request.body.price
-        await library.Product.create({
-            name: name,
-            description: description,
-            price: price,
-        })
-    }
-
-    async getProductByProductId(productId): Promise<Product> {
-        let productModel = await library.Product.findByPk(productId)
-        let product: Product = new Product()
-        if (productModel) {
-            product.setId(productModel.id)
-            product.setName(productModel.name)
-            product.setDescription(productModel.description)
-            product.setPrice(productModel.price)
+        let productData = {
+             name:  ctx.request.body.name,
+             description: ctx.request.body.description,
+             price: ctx.request.body.price
         }
-        return product
+        await library.Product.create(productData)
     }
 
     async getAllProducts(ctx: Context): Promise<Array<Product>> {
@@ -44,8 +27,19 @@ class ProductService {
         }
         return products
     }
+    
+    async getProductByProductId(productId): Promise<Product> {
+        let productModel = await library.Product.findByPk(productId)
+        let product: Product = new Product()
+        if (productModel) {
+            product.setId(productModel.id)
+            product.setName(productModel.name)
+            product.setDescription(productModel.description)
+            product.setPrice(productModel.price)
+        }
+        return product
+    }
 }
-
 
 let productService: ProductService = new ProductService()
 export default productService

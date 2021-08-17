@@ -8,7 +8,7 @@ import {
 export class User extends Model {
     name?: string;
     email?: string;
-    phoneno?: number;
+    phone_no?: number;
     address?: string;
     password?: string;
     static associate = models => {
@@ -29,7 +29,7 @@ export default (sequelize: Sequelize): typeof User => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        phoneno: {
+        phone_no: {
             type: DataTypes.NUMBER,
             allowNull: false
         },

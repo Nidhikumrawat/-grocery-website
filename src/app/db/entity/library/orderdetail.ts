@@ -6,59 +6,22 @@ import {
 } from 'sequelize';
 
 export class Orderdetail extends Model {
-    name? : string;
-    email?:string;
-    phoneno?: number;
-    productname?:string;
-    description?: string;
-    totalprice?:number;
-    orderid?:string;
-    address?: string;
-    status?:string;
-    price?:string;
-
+    order_id?: string;
+    product_id?: number;
 }
 
 export default (sequelize: Sequelize): typeof Orderdetail => {
     Orderdetail.init({
-        name: {
+        order_id: {
             type: DataTypes.STRING
         },
-       email: {
-           type: DataTypes.STRING
-       },
-       phoneno: {
-        type: DataTypes.NUMBER
-      },
-       productname: {
-           type: DataTypes.STRING
-       },
-       description: {
-        type: DataTypes.STRING
-       },
-        totalprice: {
-            type: DataTypes.NUMBER,
-        },
-        price: {
-            type: DataTypes.NUMBER,
-        },
-        quantity: {
-            type: DataTypes.NUMBER,
-        },
-        orderid: {
-            type: DataTypes.STRING
-        },
-        status: {
-            type: DataTypes.STRING,
-            defaultValue: "Pending"
-        },
-        address: {
+        product_id: {
             type: DataTypes.STRING
         }
     },
         {
             underscored: true,
-            tableName: 'orderdetails',
+            tableName: 'order_details',
             sequelize
         })
     return Orderdetail

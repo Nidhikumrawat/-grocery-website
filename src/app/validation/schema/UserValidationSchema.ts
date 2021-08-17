@@ -9,7 +9,8 @@ class UserValidationSchema {
     name: Joi.string().required(),
     email: Joi.string().required(),
     phoneno: Joi.number().positive().required(),
-    password: Joi.string() 
+    password: Joi.string(),
+    address: Joi.string() 
     
   })
 

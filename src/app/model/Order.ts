@@ -1,32 +1,35 @@
 export class Order {
     id: number
-    email: string
-    productid: number
-    orderid: string
+    user_id: number
+    order_id: string
+    status: string
+    total_order_amount: number
     createdAt: Date
 
     constructor() {
         this.id = 0
-        this.email = null
-        this.productid = 0
-        this.orderid = null
+        this.user_id = 0
+        this.order_id = null
         this.createdAt = null
+        this.total_order_amount = 0
     }
 
     setId(id: number) {
         this.id = id
     }
-    
-    setProductid(productid: number) {
-        this.productid = productid
+
+    setUserId(user_id: number) {
+        this.user_id = user_id
     }
 
-    setOrderid(orderid: string) {
-        this.orderid = orderid
+    setStatus(status: string) {
+        this.status = status
     }
-
-    setEmail(email: string) {
-        this.email = email
+    setOrderid(order_id: string) {
+        this.order_id = order_id
+    }
+    setTotalOrderAmount(total_order_amount: number) {
+        this.total_order_amount = total_order_amount
     }
 
     setCreatedAt(createdAt: Date) {
@@ -37,18 +40,19 @@ export class Order {
         return this.id
     }
 
-    getProductid(): number {
-        return this.productid
-    }
-
-    getEmail(): string {
-        return this.email
+    getUserId(): number {
+        return this.user_id
     }
 
     getOrderid(): string {
-        return this.orderid
+        return this.order_id
     }
-
+    getStatus(): string {
+        return this.status
+    }
+    getTotalOrderAmount(): number {
+        return this.total_order_amount
+    }
     getCreatedAt(): Date {
         return this.createdAt
     }
