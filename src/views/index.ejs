@@ -1,14 +1,22 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
-  <title>Ordering App</title>
+<title>Ordering App</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <style>
-  body,h1,h2,h3,h4,h5,h6 {
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "Raleway", sans-serif
   }
 
@@ -16,80 +24,353 @@
   html {
     height: 100%;
     line-height: 1.8;
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+    background-color: #ffc300;
   }
 
-  .w3-bar .w3-button {
-    padding: 16px;
+
+  .contact-left {
+    flex: basis 35%;
   }
 
-  /* Full height image header */
-  .bgimg-1 {
-    background-position: center;
-    background-size: cover;
-    background-image: url("/w3images/mac.jpg");
-    min-height: 100%;
+  .container {
+    width: 90%;
+    height: 500px;
+
   }
 
-  .w3-container {
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+  .contact-detail {
+    margin: 2vh;
+    color: #3A6B35;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+
+  }
+
+  .contact-left p {
+    margin: 30px;
+  }
+
+  .contact-right {
+    height: 100%;
+    width: 100%;
+    margin-top: 7px;
+
+  }
+
+  .contact-right form {
+    width: 100%;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 7px;
+    margin: 10px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+
+  form .btn2 {
+    padding: 8px 60px;
+    font-size: 16px;
+    height: 7vh;
+    text-align: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 35%;
+    cursor: pointer;
+  }
+
+  .btn2 {
+    background-color: #3A6b35;
+    color: white;
+    border-style: hidden;
+    border-radius: 6px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 40% 60%;
+
+  }
+
+  .btn2:hover {
+    background: #ffc300;
+    color: black;
+  }
+
+  .main-index-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 73px 600px 550px 400px 40px;
+
+  }
+
+  .aboutus {
+    background-color: #262626;
+    color: white;
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
+
+  .left-about {
+    color: white;
+    font-size: 80px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 20vh;
+  }
+
+  .right-about p {
+    color: white;
+    padding: 80px;
+    font-size: 18px;
+
+  }
+
+
+  #contact {
+    padding-top: 60px;
+    height: 550px;
+    width: 100%;
+    background-color: beige;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+
+  #header {
+    height: 70px;
+    width: 100%;
+
+  }
+
+  .container {
+    padding: 10px 10%;
+  }
+
+  .menu-options ul li {
+    margin: 20px;
+  }
+
+  .menu-options ul li :last-child {
+    margin-right: 0;
+  }
+
+  .menu-options ul li a {
+    text-decoration: none;
+  }
+
+
+  .menu-options ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+
+  }
+
+  .images {
+    margin: 0;
+    padding: 0;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .image-grid img {
+    height: 100vh;
+    margin-top: 0;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .carousel-container {
+    width: 100%;
+    background-color: #262626;
+
+    height: 600px;
+  }
+
+
+  .logo-container {
+    display: flex;
+
+  }
+
+  .logo {
+    max-width: 56px;
+    max-height: 56px;
+  }
+
+  .carousel-control-next-icon {
+    color: black;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    height: 70px;
+
+  }
+
+  .menu-options {
+    display: flex;
+    align-items: center;
 
   }
 </style>
 
 <body>
-  <br><br><br>
-  <!-- Navbar (sit on top) -->
-  <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
-      <div class="w3-right w3-hide-small">
-        <a href="/index/signup" class="w3-bar-item w3-button">SIGN UP</a>
-        <a href="/index/login" class="w3-bar-item w3-button">LOGIN</a>
+
+  <div class="main-index-container">
+    <div id="header">
+      <!-- <div class="index-container"> -->
+      <nav class="navbar">
+        <div class="logo-container">
+          <a href="/index"> <img src="/images/FreshCart_Logo.jpg" class="logo" />
+            <span class="company-name"
+              style="color:#3a6b35;text-decoration: none;font-size:18px;margin-right:80px;"><strong>FreshCart</strong></span>
+          </a>
+        </div>
+        <div class="menu-options">
+          <ul>
+            <li><a href="/index/signup"
+                style="text-decoration:none;color: green;margin-right:8px;margin-left:130vh; font-size: 16px; position: relative;">SIGN
+                UP<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                  class="bi bi-person-plus-fill" viewBox="0 0 13 13">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  <path fill-rule="evenodd"
+                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                </svg></a></li>
+            <li><a href="/index/login"
+                style="text-decoration:none;color: green; font-size: 16px; position: relative;">LOGIN <svg
+                  xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                  class="bi bi-box-arrow-in-right" viewBox="0 0 14 16">
+                  <path fill-rule="evenodd"
+                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                  <path fill-rule="evenodd"
+                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                </svg> </a></li>
+          </ul>
+        </div>
+      </nav>
+      <!-- </div> -->
+
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="/images/colousel1.png" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="/images/colousel2.png" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="/images/colousel3.png" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub-title" style="color:green;font-weight: bold; font-size:40px">Contact Us</h1>
+            <p class="contact-detail"><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"
+                style="font-size:20px;color:green;"></i> INDIA</p>
+            <p class="contact-detail"><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"
+                style="font-size:20px;color:green;"></i> Phone: +91 9876543219</p>
+            <p class="contact-detail"><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"
+                style="font-size:20px;color:green;"> </i> Email: freshcart@mail.com</p>
+          </div>
+          <form action="/index/contact" method="POST">
+            <div class="contact-right">
+              <form>
+                <input type="text" id="name" name="Name" placeholder="Your Name" required>
+                <input type="email" id="email" name="Email" placeholder="Your Email" required>
+                <input type="text" id="subject" name="Subject" placeholder="Subject" required>
+                <textarea name="Message" id="message" rows="6" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn2" value="Submit" onclick="submitForm()">Submit</button>
+
+              </form>
+            </div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- About Section -->
-  <div style="width: 100%; overflow: hidden;">
-    <div style="width: 300px; margin-left:50px;float: left;">
-      <img src="/images/index1.jpeg" style="width:400px;height:400px;">
+    <div class="aboutus">
+      <div class="left-about">About Us</div>
+      <div class="right-about">
+        <p>"Welcome to FreshCart, your one-stop destination for convenient and hassle-free grocery shopping. At
+          FreshCart, we understand the importance of quality, freshness, and convenience when it comes to your
+          groceries. Our mission is to provide you with a seamless online shopping experience, offering a wide selection
+          of fresh produce, pantry staples, household essentials, and more, all delivered right to your doorstep. With a
+          focus on customer satisfaction and reliability, we strive to exceed your expectations every time you shop with
+          us. Discover the ease of online grocery shopping with FreshCart today!"</p>
+      </div>
     </div>
-    <div class="w3-container" style="padding:128px 16px;width: 300px; float: left;margin-top: 10px;margin-left: 230px;"
-      id="about">
-      <h3 class="w3-center">ABOUT US</h3>
-      <p class="w3-center w3-large">Ordering App Project</p>
-    </div>
-  </div>
-  <!-- Contact Section -->
-  <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
-    <h3 class="w3-center">CONTACT</h3>
-    <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
-    <div style="margin-top:48px">
-      <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> INDIA</p>
-      <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +91 9876543219</p>
-      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: shoppingcart@mail.com</p>
-      <br>
-      <form action="/index/contact" method="POST">
-        <p><input class="w3-input w3-border" type="text" placeholder="name" name="name"></p>
-        <p><input class="w3-input w3-border" type="text" placeholder="email" name="email"></p>
-        <p><input class="w3-input w3-border" type="text" placeholder="subject" name="subject"></p>
-        <p><input class="w3-input w3-border" type="text" placeholder="message" name="message"></p>
-        <p>
-          <button class="w3-button w3-black" type="submit">
-            <i class="fa fa-paper-plane"></i> SEND MESSAGE
-          </button>
-        </p>
-      </form>
+    <div class="footer" style="background-color:#ffc300;color:black;height:40px;">
+      <pre>© 2024 Copyright:FreshCart</pre>
     </div>
   </div>
 
-  <!-- Footer -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <pre>© 2021 Copyright: Shopping Cart</pre>
-  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script>
+    $('#carouselExample').on('mouseenter', function () {
+      $(this).carousel('pause');
+    }).on('mouseleave', function () {
+      $(this).carousel('cycle')
+
+    });
+
+  </script>
 
 </body>
+
+
 
 </html>

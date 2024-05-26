@@ -16,34 +16,118 @@
     font-family: "Raleway", sans-serif
   }
 
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+
+  #header {
+    height: 70px;
+    width: 100%;
+  }
+
+  .container {
+    padding: 10px 10%;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 70px;
+    background-color: white;
+    ;
+  }
+
+  nav a {
+    color: #3a6b35;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 26px;
+  }
+
+  nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+  }
+
+  nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #3a6b35;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+  }
+
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+
   body,
   html {
     height: 100%;
     line-height: 1.8;
   }
 
-  .w3-bar .w3-button {
-    padding: 16px;
+  .logo-container {
+    display: flex;
+  }
+
+  .logo {
+    max-width: 70px;
+    max-height: 70px;
+  }
+
+  .menu-options ul li {
+    margin: 20px;
+  }
+
+  nav ul li :last-child {
+    margin-right: 0;
+  }
+
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
   }
 </style>
-<title>Ordering App</title>
+<title>Grocery Ordering App</title>
+
 <body>
-
-  <!-- Navbar (sit on top) -->
-  <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/admin" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
-      <div class="w3-right w3-hide-small">
-        <a href="/admin/addproduct" class="w3-bar-item w3-button">Add Product </a>
-        <a href="/admin/adduser" class="w3-bar-item w3-button">Add User </a>
-        <a href="/admin/display" class="w3-bar-item w3-button"> Display Product </a>
-        <a href="/admin/userdetails" class="w3-bar-item w3-button"> User-List </a>
-        <a href="/admin/orderlist" class="w3-bar-item w3-button"> Order-List </a>
-        <a href="/admin/feedback" class="w3-bar-item w3-button">Feedback</a>
-        <a href="/admin/logout" class="w3-bar-item w3-button">Logout</a>
+  <div id="header">
+    <nav>
+      <div class="logo-container">
+        <a href="/index"> <img src="/images/FreshCart_Logo.jpg" class="logo" />
+        </a>
       </div>
-
-    </div>
+      <ul>
+        <li><a href="/admin/addproduct"
+            style=" margin-left:8vh;text-decoration:none;color: green;align-items:center; font-size: 16px; position: relative;">Add
+            Product </a></li>
+        <li><a href="/admin/adduser" style="text-decoration:none;color: green; font-size: 16px; position: relative;">Add
+            User</a></li>
+        <li><a href="/admin/display"
+            style="text-decoration:none;color: green; font-size: 16px; position: relative;">Display Product</a></li>
+        <li><a href="/admin/userdetails"
+            style="text-decoration:none;color: green; font-size: 16px; position: relative;">User-List </a></li>
+        <li><a href="/admin/orderlist" style="text-decoration:none;color: green; font-size: 16px; position: relative;">
+            Order-List</a></li>
+        <li><a href="/admin/feedback"
+            style="text-decoration:none;color: green; font-size: 16px; position: relative;">Feedback</a></li>
+        <li><a href="/admin/logout"
+            style="text-decoration:none;color: green; font-size: 16px; position: relative;">Logout</a></li>
+      </ul>
+    </nav>
   </div>
 </body>
 

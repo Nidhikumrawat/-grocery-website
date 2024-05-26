@@ -30,10 +30,10 @@ export class UserValidator {
      async addProduct(ctx: Context) {
           const valid = new Validator(ctx.request.body,
                {
-                    email: 'required|email',
-                    phoneno: 'required|minLength:10|maxLength:12',
-                    name: 'required|minLength:3',
-                    address: 'required|maxLength:400'
+                    name: 'required|minLength:1',
+                    description: 'required|minLength:1|maxLength:100000',
+                    price: 'required|minLength:1',
+                    product_unit : 'required'
                }
           )
           const Validation = await valid.check()

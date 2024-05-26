@@ -1,75 +1,227 @@
- <!DOCTYPE html>
-    <html>
-      <title>Ordering App</title>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script  type="text/javascript"> 
-  function preventBack() {
-     window.history.forward(); 
-     } setTimeout("preventBack()", 0); 
-     window.onunload = function () { null };
- </script>
-<style>
-    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-    
-    body, html {
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ordering App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script type="text/javascript"> 
+    function preventBack() {
+      window.history.forward();
+    } setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+  </script>
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    body,
+    html {
       height: 100%;
       line-height: 1.8;
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+      background-color: #619e5a;
     }
+
     .w3-bar .w3-button {
       padding: 16px;
     }
-    </style>
-    
-    <body>
-    
-    <!-- Navbar (sit on top) -->
-    <div>
-      <% include userheader.html %>
-    </div>
-      </body>
-      </html>
-      <br><br><br>
-     <div><h2  style= "color: rgb(22, 111, 167); text-align: center;"> Product Details</h2></div>
-     <div class="table-data">
-    
-        <table  class = "table table-striped" border="1" >
-          <thead class="thead-dark">
-            <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Add To Cart</th>
-             </tr>
-            </thead>
-            <% productdata.forEach(function(product){ %>
-         <tr>
-            <td scope="row"><%= product.name %></td>
-            <td scope="row"><%= product.description %></td>
-            <td scope="row"><%= product.price %></td>
-        
-            <form action='/login/addtocart' method = "Post">
-            <td><input class="form-control" type="text" required name="quantity"></td> 
-              <td ><button type="submit" name ="productid" value=<%= product.id %> > Add To Cart<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-cart" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-              </svg></button></td>
-            </form>
-        
-         </tr>
-      <% } )%>
-        
-        </table>
-         
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      /* background-color: #619e5a; */
+      margin-top:0;
+    }
+
+    .product-card {
+      width: 300px;
+      height:410px;
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product-name {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    .product-price {
+      margin-top: 4px;
+      color:#3a6b35;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .product-description {
+      margin-top: 2px;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .add-to-cart-btn {
+      
+      height:30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color:#3a6b35;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .add-to-cart-btn:hover {
+
+      background-color:#3a6b35;
+    }
+
+    .cart-icon {
+      margin-right: 3px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .quantity-label {
+      font-weight: bold;
+    }
+
+    .quantity-btn {
+      background-color: #3a6b35;
+      height:5vh;
+      width:4vh;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      padding: 4px 6px;
+      cursor: pointer;
+    }
+
+    .quantity-btn:hover {
+      background-color:#3a6b35;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <% include userheader.html %>
+  </div>
+  
+  <div>
+    <h2 style="color:white; text-align: center;margin-top:6vh; font-family:Arial, Helvetica, sans-serif;">Product Details</h2>
+  </div>
+  <div class="product-container">
+    <% productdata.forEach(function(product){ %>
+      <div class="product-card">
+        <img class="product-image" src="/images/<%= product.image_url %>" alt="<%= product.name %>">
+        <div class="product-name">
+          <%= product.name %>
         </div>
-        
-    
+        <div class="product-price">$<%= product.price %>/<%= product.product_unit %>
+        </div>
+        <div class="product-description">
+          <%= product.description %>
+        </div>
+        <div class="quantity-controls">
+          <div class="quantity-label">Quantity:</div>
+          <div>
+            <button class="quantity-btn" onclick="decrementQuantity('<%= product.id %>')">-</button>
+            <span class="quantity" id="quantity_<%= product.id %>">1</span>
+            <button class="quantity-btn" onclick="incrementQuantity('<%= product.id %>')">+</button>
+          </div>
+        </div>
+        <br>
+        <div class="add-to-cart-btn" onclick="addToCart('<%= product.id %>')">
+          <span class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-cart"
+              viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+          </span>
+          Add to Cart
+        </div>
+      </div>
+
+      <% }) %>
+  </div>
+  <script>
+    function addToCart(productId) {
+      var quantity = parseInt(document.querySelector("#quantity_" + productId).textContent);
+      // Your code to submit the form with productId and quantity
+      console.log("Product ID:", productId);
+      console.log("Quantity:", quantity);
+      // Dynamically create a form
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "/login/addtocart");
+
+      // Create an input field for quantity
+      var quantityInput = document.createElement("input");
+      quantityInput.setAttribute("type", "hidden");
+      quantityInput.setAttribute("name", "quantity");
+      quantityInput.setAttribute("value", quantity);
+      form.appendChild(quantityInput);
+
+      // Create an input field for product id
+      var productIdInput = document.createElement("input");
+      productIdInput.setAttribute("type", "hidden");
+      productIdInput.setAttribute("name", "productid");
+      productIdInput.setAttribute("value", productId);
+      form.appendChild(productIdInput);
+
+      // Append the form to the body and submit it
+      document.body.appendChild(form);
+      form.submit();
+
+    }
+
+
+    function incrementQuantity(productId) {
+      var quantityElement = document.querySelector("#quantity_" + productId);
+      var quantity = parseInt(quantityElement.textContent);
+      quantityElement.textContent = quantity + 1;
+    }
+
+    function decrementQuantity(productId) {
+      var quantityElement = document.querySelector("#quantity_" + productId);
+      var quantity = parseInt(quantityElement.textContent);
+      if (quantity > 1) {
+        quantityElement.textContent = quantity - 1;
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -3,12 +3,16 @@ export class Product {
     name: string
     description: string
     price: number
+    image_url: string
+    product_unit: string
 
     constructor() {
         this.id = 0
         this.name = null
         this.description = null
         this.price = 0
+        this.image_url = null
+        this.product_unit = null
     }
 
     setId(id: number) {
@@ -26,6 +30,15 @@ export class Product {
     setPrice(price: number) {
         this.price = price
     }
+
+    setImageUrl(image_url: string) {
+        this.image_url = image_url
+    }
+
+    setProductUnit(product_unit: string) {
+        this.product_unit = product_unit
+    }
+
     getId(): number {
         return this.id
     }
@@ -39,7 +52,13 @@ export class Product {
     }
 
     getPrice(): number {
-       return this.price
-    } 
- 
+        return this.price
+    }
+    getImageUrl(): string {
+        return this.image_url
+    }
+    getProductUnit(): string {
+        return this.product_unit
+    }
+
 }

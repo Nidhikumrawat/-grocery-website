@@ -1,101 +1,203 @@
 <!DOCTYPE html>
-<html>
-  <title>Ordering App</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Raleway", sans-serif
-  }
+<html lang="en">
 
-  body,
-  html {
-    height: 100%;
-    line-height: 1.8;
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
-  }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ordering App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript"> 
+        function preventBack() {
+            window.history.forward();
+        } setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif;
+        }
 
-  .w3-bar .w3-button {
-    padding: 16px;
-  }
-</style>
+        body,
+        html {
+            height: 100%;
+            line-height: 1.8;
+            background-color: #6ca36d;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            margin-top: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 0px;
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-description {
+            margin-top: 5px;
+        }
+
+        .product-price {
+            color: #3a6b35;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .quantity-label {
+            font-weight: bold;
+        }
+
+        .quantity-btn {
+            background-color: #3a6b35;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .quantity-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .remove-btn {
+            color: #dc3545;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            color: #a51e2d;
+        }
+
+        .empty-cart-btn,
+        .order-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .total-amount {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</head>
 
 <body>
-  <!-- Navbar (sit on top) -->
-  <div>
-    <% include userheader.html %>
-  </div>
+    <div>
+        <% include userheader.html %>
+    </div>
+    <div class="container">
+        <h2 class="text-center" style="color:whitesmoke;">Display cart details</h2>
+        <% usercartitems.forEach(function(usercartitem){ %>
+            <div class="product-card row">
+                <div class="col-md-4">
+                    <img class="product-image" src="/images/<%= usercartitem.product.image_url %>"
+                        alt="<%= usercartitem.product.name %>">
+                </div>
+                <div class="product-details col-md-8">
+                    <div class="product-name">
+                        <%= usercartitem.product.name %>
+                    </div>
+                    <div class="product-description">
+                        <%= usercartitem.product.description %>
+                    </div>
+                    <div class="product-price">$<span class="price">
+                            <%= usercartitem.product.price %>/<%= usercartitem.product.product_unit %>
+                        </span></div>
+                    <div class="product-quantity">Quantity: <span class="price">
+                            <%= usercartitem.cart.quantity %>
+                        </span></div>
+                    <form action='/login/removecartitem' method="Post">
+                        <button type="submit" name="cartid" value=<%=usercartitem.cart.id %> class="remove-btn">
+                            <i class="fa fa-trash"></i> Remove Item
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <% }) %>
+                <div class="total-amount text-center">
+                    Total Amount: $<span id="totalAmount">
+                        <%= totalOrderAmount %>
+                    </span>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <% if(count){ %>
+                            <form action="/login/emptycart" method="POST">
+                                <button type="submit" name="cartid" class="btn btn-danger empty-cart-btn">Empty
+                                    Cart</button>
+                            </form>
+                            <% } %>
+                    </div>
+                    <div class="col-md-6">
+                        <% if(count){ %>
+                            <form action='/order' method="Post">
+                                <button type="submit" name="cartid" class="btn order-btn"
+                                    style="background-color: #3a6b35;color:white">Order</button>
+                            </form>
+                            <% } %>
+                    </div>
+                </div>
+    </div>
+    <script>
+        function incrementQuantity(button, price) {
+            var quantityElement = button.parentElement.querySelector(".quantity");
+            var quantity = parseInt(quantityElement.textContent);
+            quantityElement.textContent = quantity + 1;
+            updateTotalPrice(price);
+        }
+        function decrementQuantity(button, price) {
+            var quantityElement = button.parentElement.querySelector(".quantity");
+            var quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantityElement.textContent = quantity - 1;
+                updateTotalPrice(-price);
+            }
+        }
+        function updateTotalPrice(price) {
+            var totalPriceElement = document.getElementById("totalAmount");
+            var totalAmount = parseFloat(totalPriceElement.textContent || 0);
+            totalAmount += price;
+            totalPriceElement.textContent = totalAmount.toFixed(2);
+        }
+    </script>
 </body>
 
 </html>
-<br> <br> <br>
-<div class="table-data">
-  <h2 style="color: rgb(22, 111, 167); text-align: center;">Display cart details</h2>
-  <br>
-  <table class="table table-striped" border="1">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Product Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Quantity</th>
-        <th scope="col"> Total Price</th>
-        <th scope="col">Remove item</th>
-      </tr>
-    </thead>
-    <% usercartitems.forEach(function(usercartitem){ %>
-      <tr>
-        <td scope="row">
-          <%= usercartitem.product.name %>
-        </td>
-        <td scope="row">
-          <%= usercartitem.product.description %>
-        </td>
-        <td scope="row">
-          <%= usercartitem.cart.quantity %>
-        </td>
-        <td scope="row">
-          <%= usercartitem.cart.quantity * usercartitem.product.price %>
-        </td>
-        <form action='/login/removecartitem' method="Post">
-          <td scope="row"><button type="submit" name="cartid" value=<%=usercartitem.cart.id %>> Remove Item <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-          </svg></button>
-          </td>
-        </form>
-
-      </tr>
-      <% } )%>
-
-  </table>
-  <br><br>
-  <div style="width: 100%; overflow: hidden;">
-    <div style="width: 300px; margin-left:50px;float: left;">
-      <% if(count){ %>
-        <form action="/login/emptycart" method="POST">
-          <% } %>
-            <button type="submit" name="cartid" style="margin-left: 40%;"> Empty Cart</button>
-        </form>
-    </div>
-    <div style="width: 300px; float: left;">
-      <% if(count){ %>
-        <form action='/order' method="Post">
-          <% } %>
-            <td scope="row"><button type="submit" name="cartid"> Order</button></td>
-        </form>
-    </div>
-  </div>

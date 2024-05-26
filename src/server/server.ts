@@ -45,7 +45,7 @@ render(app, {
     debug: false
 });
 app.use(serve(path.join(__dirname,'../public')));
-
+// app.use(serve(path.join(__dirname,'../public')));
 
 routes(app)
 

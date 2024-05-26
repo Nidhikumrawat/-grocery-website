@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript"> 
+    function preventBack() {
+      window.history.forward();
+    } setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+  </script>
   <style>
     body,
     h1,
@@ -19,35 +25,132 @@
     h6 {
       font-family: "Raleway", sans-serif
     }
+    *{
+      margin:0;
+      padding:0;
+    }
 
     body,
     html {
       height: 100%;
+      width:100%;
+      margin:0;
+      padding:0;
       line-height: 1.8;
-      background-color: #ffcfdf;
-      background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+      overflow: hidden;
 
     }
 
-    .w3-bar .w3-button {
+  
+    .addproduct_container{
+    height:520px;
+    width:390px;
+    justify-content: center;
+    align-items: center;
+     background-color: #30302b;
+    margin-left:10%;
+    /* margin-top:0; */
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 0  10px gray;
+    /* left:25vh; */
+    z-index:1;
+    top:6vh;
+    left:7vh;
+    border-radius: 7%;
+    }
+    .background-img img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    position: absolute;
+    z-index:-1;
+
+  }
+    /* .w3-bar .w3-button {
       padding: 16px;
-    }
+    } */
+    m
+  .form-grid{
+    width:100%;
+    display:grid;
+    grid-template-rows:auto auto auto auto auto;
+    align-items:center;
+    grid-gap:2px;
+}
+  .form-container{
+    height:520px;
+    width:390px;
+    padding-left:6px;
+    padding-right:6px;
+    padding-top:2px;
+    padding-bottom: 2px;
+    margin-left:9px; 
+    margin-right:9px;
+    display:grid;
+    grid-template-rows:10% 80% 10%;
+
+  }
+  .main-container{
+    margin:0;
+    padding:0;
+    height:100%;
+    width:100vw;
+    overflow: hidden;
+  }
+  .btn {
+   height:6vh;
+   width:30vh;
+    margin-left:12vh;
+    margin-top:1vh;
+   
+    font-size:18px;
+    background-color:#3a6b35;
+    color:whitesmoke;
+    text-align: center;
+    border-radius: 2px solid green;
+   }
+  .form-control{
+    /* border:2px solid black; */
+    width:95%;
+    color:black;
+    background: whitesmoke;
+    font-size:14px;
+    border:transparent;
+    margin-right: 3px;
+    /* border-style: hidden; */
+    border-bottom: 2px  solid whitesmoke;
+    /* border-style:initial; */
+    /* border-style:ridge; */
+    
+  }
+  .form-group label{
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    /* display:block; */
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+  }
+
   </style>
-<title>Ordering App</title>
+  <title>Grocery Ordering App </title>
+</head>
+
 <body>
-  <div>
+   <div>
     <% include adminheader.html %>
   </div>
-  <br><br><br>
-  <h1 style="color: rgb(22, 111, 167); text-align: center;">Add Product</h1>
-  <div class="container" style="width: 500px;">
+  <!-- <h1 style="color: rgb(22, 111, 167); text-align: center;">Add Product</h1> -->
+  <div class="main-container">
     <% if(message.length){ %>
       <div style="color: brown; text-align: center;font-size:large ;">
         <%= message %>
       </div>
       <% } %>
-        <form action="/admin/addProduct" method="POST">
-          <div class="form-group">
+        <form action="/admin/addProduct" method="POST" enctype="multipart/form-data">
+          <!-- Set enctype to enable file uploads -->
+          <!-- <div class="form-group">
             <label for="">Name*</label>
             <input class="form-control" type="text" name="name" autocomplete="off">
           </div>
@@ -57,11 +160,56 @@
           </div>
           <div class="form-group">
             <label for="">Price*</label>
-            <input class="form-control" type="number" name="price" autocomplete="off">
+            <input class="form-control" type="number" name="price" step="any" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="">Unit*</label>
+            <input class="form-control" type="text" name="product_unit" autocomplete="off">
+          </div> -->
+
+          <!-- Add file input field for image upload -->
+          <!-- <div class="form-group">
+            <label for="">Image*</label>
+            <input type="file" name="file">
           </div>
           <button class="btn btn-primary" type="submit">Add Product</button>
         </form>
+  </div> -->
+      <div class="background-img">
+        <img src="/images/shop.jpg"/></div>
+      <div class="addproduct_container">
+        <div class="form-container">
+        <h1 style="color: whitesmoke; text-align: center; font-size: 24;font-family:'Times New Roman', Times, serif;">Add Products</h1>
+        <div class="form-grid">
+        <div class="form-group">
+          <label for="">Name*</label>
+          <input class="form-control" type="text" name="name" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="">Description*</label>
+          <input class="form-control" type="text" name="description" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="">Price*</label>
+          <input class="form-control" type="number" name="price" step="any" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="">Unit*</label>
+          <input class="form-control" type="text" name="product_unit" autocomplete="off">
+        </div> 
+      
+      <div class="form-group">
+        <label for="">Image*</label>
+        <input type="file" name="file" >
+      </div>
+      </div>
+      <button class="btn" type="submit">Add Product</button>
+    </form>
   </div>
-</body>
+  </div>
+  </div>
+</div>
+  
+</body> 
 
 </html>

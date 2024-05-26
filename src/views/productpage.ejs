@@ -1,69 +1,48 @@
 <!DOCTYPE html>
 <html>
+<head>
   <title>Ordering App</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script  type="text/javascript"> 
-  function preventBack() {
-     window.history.forward(); 
-     } setTimeout("preventBack()", 0); 
-     window.onunload = function () { null };
- </script>
- 
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-
-body, html {
-  height: 100%;
-  line-height: 1.8;
-  background-color: #ffcfdf;
-      background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
-    
-}
-.w3-bar .w3-button {
-  padding: 16px;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script  type="text/javascript"> 
+    function preventBack() {
+       window.history.forward(); 
+       } setTimeout("preventBack()", 0); 
+       window.onunload = function () { null };
+   </script>
+  <style>
+    body, h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif; }
+    body, html { height: 100%; line-height: 1.8;  background-color:#b7bf96;}
+    .w3-bar .w3-button { padding: 16px; }
+    .product-container {width:100vw;height:100%; display: flex; flex-wrap: wrap; justify-content: center; }
+    .product-card { width: 300px; margin: 20px; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .product-image { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+    .product-name { margin-top: 10px; font-weight: bold; }
+    .product-price { margin-top: 5px; color: #007bff; font-size: 20px; }
+    .product-description { margin-top: 5px; }
+  </style>
+</head>
 <body>
   <div>
     <% include adminheader.html %>
   </div>
-<!-- Navbar (sit on top) -->
-  </body>
-  </html>
-<br><br><br>
- <div><h2  style= "color: rgb(22, 111, 167); text-align: center;">Display Product Details</h2></div>
- <div >
-    <table class = "table table-striped"  width='50' height = "50" border="1">
-      <thead class="thead-dark"> <tr>
-            <th scope="col">S.N</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-         </tr>
-</thead>
-        <% productdata.forEach(function(product){ %>
-     <tr>
-        <td scope="row"><%= product.id %></th>
-        <td scope="row"><%= product.name %></td>
-        <td scope="row"><%= product.description %></td>
-        <td scope="row"><%= product.price %></td>
-     </tr>
-  <% } )%>
-    
-    </table>
- 
-    </div>
 
-
-     
-
-
+  <div>
+    <h2 style="color:white; text-align: center; font-family: Arial, Helvetica, sans-serif;margin-top:4vh;">Display Product Details</h2>
+  </div>
+  <div class="product-container">
+    <% productdata.forEach(function(product){ %>
+      <div class="product-card">
+        <img class="product-image" src="/images/<%= product.image_url %>" alt="<%= product.name %>">
+        <div class="product-name"><%= product.name %></div>
+        <div class="product-price">$<%= product.price %>/<%= product.product_unit %></div>
+        <div class="product-description"><%= product.description %></div>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

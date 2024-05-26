@@ -9,38 +9,152 @@
   body,h1,h2,h3,h4,h5,h6 {
     font-family: "Raleway", sans-serif
   }
+  * {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+#header{
+  height:70px;
+  width:100%;
+}
+.container {
+  padding: 10px 10%;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height:70px;
+}
+nav a{
+  color:#3a6b35;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size:26px;
+}
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+}
+nav ul li a {
+  color: green;
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+}
 
-  body,
+ 
+nav ul li a::after {
+  content: '';
+  width: 0;
+  height: 2px;
+  background: #3a6b35;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  transition: 0.5s;
+}
+nav ul li a:hover::after {
+  width: 100%;
+}
+ body,
   html {
     height: 100%;
     line-height: 1.8;
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+    /* background-color: #FAACA8; */
+    /* background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%); */
   }
+ 
+.logo-container{
+    display:flex;
+    /* align-items:center; */
+   }
 
-  .w3-bar .w3-button {
+
+   .logo{
+     /* margin-top:;  */
+    max-width: 70px;
+    max-height:70px;
+   }
+   .menu-options ul li {
+  /* display: inline-block;
+  list-style-type: none;
+  margin: 10px 20px; */
+  margin:20px;
+}
+
+nav ul li :last-child{
+  margin-right:0;
+}
+
+
+  
+nav ul {
+    list-style-type: none;
+    display:flex;
+    margin:0;
+    padding:0;
+    justify-content: center;
+
+   }
+  /* .w3-bar .w3-button {
     padding: 16px;
   }
+  #myNavbar{
+ display:grid;
+ grid-template-columns: 30% 70% ;
+
+  } */
 </style>
 
 <body>
 
   <!-- Navbar (sit on top) -->
-  <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
+<!-- <div class="w3-top">
+    <div class="w3-bar  w3-card" id="myNavbar">
+      <a href="/index" class="w3-bar-item w3-button w3-wide" style="text-decoration:none;" >FreshCart</a>
       <div class="w3-right w3-hide-small">
-        <a href="/admin/addproduct" class="w3-bar-item w3-button">Add Product </a>
-        <a href="/admin/adduser" class="w3-bar-item w3-button">Add User </a>
-        <a href="/admin/display" class="w3-bar-item w3-button"> Display Product </a>
-        <a href="/admin/userdetails" class="w3-bar-item w3-button"> User-List </a>
-        <a href="/admin/orderlist" class="w3-bar-item w3-button"> Order-List </a>
-        <a href="/admin/feedback" class="w3-bar-item w3-button">Feedback</a>
-        <a href="/admin/logout" class="w3-bar-item w3-button">Logout</a>
+        <a href="/admin/addproduct" class="w3-bar-item w3-button" style="text-decoration:none;">Add Product </a>
+        <a href="/admin/adduser" class="w3-bar-item w3-button" style="text-decoration:none;">Add User </a>
+          <a href="/admin/display" class="w3-bar-item w3-button" style="text-decoration:none;"> Display Product </a>
+        <a href="/admin/userdetails" class="w3-bar-item w3-button" style="text-decoration:none;"> User-List </a>
+        <a href="/admin/orderlist" class="w3-bar-item w3-button" style="text-decoration:none;"> Order-List </a>
+        <a href="/admin/feedback" class="w3-bar-item w3-button" style="text-decoration:none;">Feedback</a>
+        <a href="/admin/logout" class="w3-bar-item w3-button" style="text-decoration:none;">Logout</a>
       </div>
 
     </div>
-  </div>
+  </div> -->
+  <div id="header">
+     
+    <nav >
+      <div class="logo-container">
+        <!-- <a href="/index" style="color:#3a6b35;text-decoration: none;font-size:x-large;margin-left:6vh;"><strong>FreshCart</strong></a>
+       <a> <span style="max-height:50px; width:50" <img src="/images/FreshCart_Logo.jpg"/></span></a> -->
+       <a href="/index"> <img src="/images/FreshCart_Logo.jpg" class="logo"/>
+
+       </a>
+      </div>
+     
+        <ul>
+          <li><a href="/admin/addproduct">Add Product </a></li>
+          <li><a href="/admin/adduser">Add User</a></li>
+          <li><a href="/admin/display">Display Product</a></li>
+          <li><a href="/admin/userdetails">User-List </a></li>
+          <li><a href="/admin/orderlist"> Order-List</a></li>
+          <li><a href="/admin/feedback">Feedback</a></li>
+          <li><a href="/admin/logout">Logout</a></li>
+        
+
+        </ul>
+      </nav>
+    </div>
+
+
 </body>
 
 </html>

@@ -9,7 +9,8 @@ export class Product extends Model {
     name?: string;
     description?: string;
     price?: number;
-   
+    image_url?: string;
+    product_unit?: string
 }
 
 export default (sequelize: Sequelize): typeof Product => {
@@ -25,6 +26,15 @@ export default (sequelize: Sequelize): typeof Product => {
         price: {
             type: DataTypes.NUMBER,
             allowNull: false
+        },
+        image_url: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        product_unit: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'unit'
         }
     },
         {

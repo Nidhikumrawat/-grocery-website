@@ -1,23 +1,41 @@
 <div>
   <% include adminheader.html %>
 </div>
-<br><br><br><br>
+<br>
 <html>
 
 <head>
   <style>
-  body,.card{
+    .detail{
+    margin-left:40px;
+   }
+    
+    body, .card{
       height: 100%;
-      line-height: 1.8;
-      background-color: #FAACA8;
-      background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
+      background-color:beige;
+      border:transparent;
+      /* line-height: 1.8; */
+    /* background-color:#3a6b35; */
+    /* background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%); */
     }
-  </style>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    .heading{
+      margin:40px;
+      font-size:18px;
+      font-style: oblique;
+      color:black;
+    }
+   #total{
+    color:#3a6b35;
+    font-weight: bold;
+    font-size:20px;
+    font-style: oblique;
 
+   }
+   
+  </style>
+  
 </head>
-<div class="card">
+<!-- <div class="card">
   <div class="title" style="color: rgb(10, 118, 185);"><strong>Purchase Reciept</strong></div>
   <div class="info">
     <div class="row">
@@ -88,6 +106,64 @@
     </form>
     
   </div>
+</div> -->
+<div class="card">
+  <div class="title" style= "color: #3a6b35;font-size:35px;margin-left:40%;margin-bottom:20px;"><strong>Purchase Reciept</strong></div>
+  <div class="info">
+      <div class="row">
+          <div class="col-7"> <span class="heading"><strong>Date</strong></span><br> <span class="detail"><%= order.createdAt  %> </span> </div>
+          <div class="col-5 pull-right">
+             <span class="heading"><strong>Order No.</strong></span><br> <span id="details"><%= orderId  %> 
+             </span> </div>
+      </div>
+      <div>
+        <br>
+        <div><span class="heading"><strong>User Details</strong></span><br> <span id="details"></span>
+          <div>
+            <span class="detail">Name :</span> <span><%= userDetails.name  %> </span><br>
+            <span class="detail">Email Id :</span> <span><%= userDetails.email  %> </span><br>
+            <span class="detail">Contact No :</span> <span><%= userDetails.phone_no  %> </span><br>
+            <span class="detail">Address :</span> <span><%= userDetails.address  %> </span><br>
+          </div>                 
+        </div>
+        <br>
+        <div><span class="heading"><strong>Order Products</strong></span><br> <span id="details"></span>
+        <span class="col-5 pull-right" > <span class="heading"><strong> Order Status.</strong> </span><br> <span class="detail"><%= orderDetails.status  %> </span> </span>
+        <% orderDetails.forEach(function(orderDetails){ %>
+          <div><span class="heading"><strong>Product Details</strong>
+          </span><br> <span id="details"></span>
+         
+          
+          <div>
+            <span class="detail">Name :</span> <span><%= orderDetails.productName  %> </span><br>
+            <span class="detail">Description :</span> <span><%= orderDetails.description  %> </span><br>
+            <span class="detail">Price/item :</span> <span><%= orderDetails.price  %> </span><br>
+           
+          </div>  
+          <% } )%>
+          <br>
+          <span class="heading" ><strong > Total Price :</strong> </span> <span id="total"><%= order.total_order_amount  %> </span><br>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<div style="margin-left: 40%;">
+  <form action="/admin/updatestatus" method="POST">
+    <select name="status"  style="height:5vh;width:20vh;margin-left:8vh;margin-top:2vh;font-size:15px;text-align: center;
+    border-radius: 2px solid transparent;">
+      <option value="Pending">Pending</option>
+      <option value="On Its Way">On It's Way</option>
+      <option value="Delivered">Delivered</option>
+      <option value="Refunded">Refunded</option>
+    </select>
+    <button name="orderId" style="height:5vh;width:20vh;margin-left:14vh;margin-top:2vh;font-size:15px;background-color:#3a6b35; color:whitesmoke;text-align: center;
+     border-radius: 2px solid transparent;" value=<%=order.id %> >Update</button>
+    <br> <br>
+  </form>
+  
+</div>
 </div>
 
 </html>

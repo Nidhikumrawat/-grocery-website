@@ -1,85 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <title>Ordering App</title>
+<title>Ordering App</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script  type="text/javascript"> 
+<script type="text/javascript"> 
   function preventBack() {
-     window.history.forward(); 
-     } setTimeout("preventBack()", 0); 
-     window.onunload = function () { null };
- </script>
+    window.history.forward();
+  } setTimeout("preventBack()", 0);
+  window.onunload = function () { null };
+</script>
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Raleway", sans-serif
+  }
 
-body, html {
-  height: 100%;
-  line-height: 1.8;
-  background-color: #ffcfdf;
-  background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
-    
-}
-.w3-bar .w3-button {
-  padding: 16px;
-}
-.scroll {
-        background-color: rgb(74, 214, 219);
-        width: 1100px;
-        height: 450px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        text-align: left;
-        padding: 10px;
-      }
+  body,
+  html {
+    height: 100%;
+    line-height: 1.8;
+    background-color: #b7bf96;
+  }
+
+  .w3-bar .w3-button {
+    color: green;
+    padding: 16px;
+  }
+
+  .scroll {
+    background-color: #ffca4b;
+    width: 1100px;
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+  }
 </style>
 
 <body>
   <div>
     <% include adminheader.html %>
   </div>
-<!-- Navbar (sit on top) -->
-  </body>
-  </html>
-  <br><br><br>
-  <div><h2  style= "color: rgb(22, 111, 167); text-align: center;">Display All Order Details</h2></div>
-  <div >
-     <table class = "table table-striped"  border="1" class="scroll">
-       <thead class="thead-dark"> <tr>
-            <th scope ="col">Order ID</th>
-            <th scope ="col">UserName</th>
-           <th scope ="col"> Total Price</th>
-            <th scope ="col">Ordered On</th>
-            <th scope ="col">Status</th>
-            <th scope ="col">Details</th>
-         </tr>
-         </thead>
-         <% orderdetails.forEach(function(order){ %>
-            <tr>
-               <td scope ="row"><%= order.order.order_id %></th>
-               <td scope ="row"><%= order.userName %></th>
-                <td scope ="row"><%= order.order.total_order_amount %></td>
-                <td scope ="row"><%= order.order.createdAt %></td>
-                <td scope ="row"><%= order.order.status %></td>
-                
-              <form action="/admin/viewDetails" method="POST">
-                
-                <td>
-                  <button name="orderId" value=<%= order.order.order_id %>>View Details</button>
-                  <input type="hidden" name= "id" value=<%= order.order.id %> >
-               </td>
-              </form>
-            </tr>
-            <% } )%>
-        
-    </table>
- 
-    </div>
-    <br><br><br><br><br>
+</body>
 
+</html>
+<br>
+<div>
+  <h2 style="color:white;text-align: center;">Display All Order Details</h2>
+</div>
+<br>
+<div>
+  <table class="table table-striped" border="1" class="scroll">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">UserName</th>
+        <th scope="col"> Total Price</th>
+        <th scope="col">Ordered On</th>
+        <th scope="col">Status</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <% orderdetails.forEach(function(order){ %>
+      <tr>
+        <td scope="row">
+          <%= order.order.order_id %>
+            </th>
+        <td scope="row">
+          <%= order.userName %>
+            </th>
+        <td scope="row">
+          <%= order.order.total_order_amount %>
+        </td>
+        <td scope="row">
+          <%= order.order.createdAt %>
+        </td>
+        <td scope="row">
+          <%= order.order.status %>
+        </td>
+
+        <form action="/admin/viewDetails" method="POST">
+
+          <td>
+            <button name="orderId"
+              style="  width:135px;border:none;background-color: #3a6b35; color:whitesmoke; font-family: Arial, Helvetica, sans-serif;"
+              value=<%=order.order.order_id %>>View Details</button>
+            <input type="hidden" name="id" value=<%=order.order.id %> >
+          </td>
+        </form>
+      </tr>
+      <% } )%>
+  </table>
+</div>
+<br><br><br><br><br>

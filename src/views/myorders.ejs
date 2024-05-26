@@ -1,91 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ordering App</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script  type="text/javascript"> 
- function preventBack() {
-    window.history.forward(); 
-    } setTimeout("preventBack()", 0); 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript"> 
+    function preventBack() {
+      window.history.forward();
+    } setTimeout("preventBack()", 0);
     window.onunload = function () { null };
-</script>
-<style>
-  body, h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway", sans-serif
-  }
+  </script>
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif;
+    }
 
     body,
-  html {
-    height: 100%;
-    line-height: 1.8;
-    background-color: #FAACA8;
-    background-image: linear-gradient(45deg, #FAACA8 0%, #DDD6F3 100%);
-  }
+    html {
+      height: 100%;
+      line-height: 1.8;
+      background-color: #6ca36d;
+    }
 
-  .w3-bar .w3-button {
-    padding: 16px;
-  }
-</style>
+    .container {
+      margin-top: 50px;
+    }
+
+    .order-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .order-details {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+
+    .order-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .view-details-btn {
+      width: 20vh;
+      background-color: #2c5f2d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .view-details-btn:hover {
+      background-color: #ffc300;
+      color: black;
+    }
+
+    .order-image {
+      width: 100px;
+      height: auto;
+      margin-right: 20px;
+    }
+  </style>
+</head>
 
 <body>
-
-  <!-- Navbar (sit on top) -->
   <div>
     <% include userheader.html %>
   </div>
+  <div class="container">
+    <div>
+      <h2 class="text-center"
+        style="color:whitesmoke;margin-bottom:15px;font-size:30px;font-family:Arial, Helvetica, sans-serif;">My Orders
+      </h2>
+    </div>
+    <% userorderitems.forEach(function(order){ %>
+      <div class="order-card">
+        <img src="/images/orderBag.jpg" alt="Order Bag" class="order-image">
+        <div class="order-details">
+          <div><strong>Order ID:</strong>
+            <%= order.order_id %>
+          </div>
+          <div><strong>Total Price:</strong>
+            <%= order.total_order_amount %>
+          </div>
+          <div><strong>Ordered On:</strong>
+            <%= order.createdAt %>
+          </div>
+          <div><strong>Status:</strong>
+            <%= order.status %>
+          </div>
+        </div>
+        <div class="order-actions">
+          <form action="/login/viewDetails" method="POST">
+            <input type="hidden" name="id" value="<%=order.id %>">
+            <button type="submit" name="orderId" value="<%=order.order_id %>" class="view-details-btn">View
+              Details</button>
+          </form>
+        </div>
+      </div>
+      <% } )%>
+  </div>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
-<br><br><br>
-<div>
-  <h2 style="color: rgb(22, 111, 167); text-align: center;">Display Order Details</h2>
-</div>
-<div class="table-data">
-  <table class="table table-striped" width='50' height="50" border="1">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Order Id</th>
-        <th scope="col"> Total Price</th>
-        <th scope="col">Ordered On</th>
-        <th scope="col">Status</th>
-        <th scope="col">Details</th>
-      </tr>
-    </thead>
-    <% userorderitems.forEach(function(order){ %>
-      <tr>
-        <td scope="row">
-          <%= order.order_id %>
-        </td>
-        <td scope="row">
-          <%= order.total_order_amount %>
-        </td>
-
-        <td scope="row">
-          <%= order.createdAt %>
-        </td>
-        <td scope="row">
-          <%= order.status %>
-        </td>
-
-        <form action="/login/viewDetails" method="POST">
-          <input type="hidden" name="id" value=<%=order.id %>>
-          <td><button name="orderId" value=<%=order.order_id %>>View Details</button> </td>
-        </form>
-      </tr>
-
-      </tr>
-      <% } )%>
-
-  </table>
-
-</div>

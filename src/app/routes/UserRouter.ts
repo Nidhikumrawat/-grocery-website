@@ -5,8 +5,52 @@ import orderController from '../controller/OrderController'
 import connectController from '../controller/ConnectController'
 import cartController from '../controller/CartController'
 import authentication from '../core/middleware/Authentication'
+import multer from '@koa/multer';
+import path from 'path';
+import fs from 'fs';
+// File upload configuration
+// const upload = multer({
+//     dest: 'uploads' // Destination folder for uploaded files
+//   });
+  
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './src/public/images/')  // Specify the directory where files will be saved
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ storage: storage });
+
 
 const userRouterManager: RouterManager = new RouterManager('/')
+
+userRouterManager.post('upload',upload.single('file'), async (ctx, next) => {
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",ctx.request)
+    const { file } = ctx.request;
+    console.log(file,__dirname,file.filename)
+    const filePath = path.join('C:\\Users\\DELL\\Desktop\\Project\\ordering_app\\koa_application', 'uploads', file.filename);
+  console.log("###########1",filePath)
+    // Save the file to the server
+    const reader = fs.createReadStream(file.path);
+    console.log("###########2",filePath)
+
+    const writer = fs.createWriteStream(filePath);
+    console.log("###########3",filePath)
+
+    reader.pipe(writer);
+    console.log("###########4",filePath)
+  
+    // Store image path in the database
+    // await pool.query('UPDATE products SET image_url = $1 WHERE id = $2', [filePath, ctx.request.body.productId]);
+  
+    ctx.status = 200;
+    ctx.body = { success: true, message: 'Image uploaded successfully' };
+  });
+
 
 userRouterManager.get('index', userController.getIndexPage)
 
@@ -48,7 +92,7 @@ userRouterManager.get('logout',userController.logout)
 // Admin Routes
 userRouterManager.get('admin/addproduct', authentication.authUser,productController.addProduct)
 
-userRouterManager.post('admin/addProduct',authentication.authUser,productController.addProducts)
+userRouterManager.post('admin/addProduct',authentication.authUser,upload.single('file'),productController.addProducts)
 
 userRouterManager.get('admin/adduser', authentication.authUser, userController.addUserPage)
 

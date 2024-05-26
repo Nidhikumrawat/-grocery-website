@@ -16,7 +16,7 @@ class ProductController {
     async getAllProducts(ctx: Context) {
         try {
             let userEmail: string = ctx.cookies.get("user-detail");
-            let products: Array<Product> = await productService.getAllProducts(ctx)
+            let products: Array<Product> = await productService.getAllProducts(ctx);
             ctx.status = httpConstants.HTTP_SUCCESS_OK
             if (userEmail == process.env.ADMIN_EMAIL) {
                 await ctx.render('productpage', { productdata: products });

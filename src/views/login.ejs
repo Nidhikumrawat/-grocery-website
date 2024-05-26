@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <title>Ordering App</title>
   <meta charset="utf-8">
@@ -8,14 +9,19 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script  type="text/javascript"> 
+  <script type="text/javascript"> 
     function preventBack() {
-       window.history.forward(); 
-       } setTimeout("preventBack()", 0); 
-       window.onunload = function () { null };
-   </script>
+      window.history.forward();
+    } setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+  </script>
   <style>
-    body,h1,h2,h3,h4,h5,h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: "Raleway", sans-serif
     }
 
@@ -23,45 +29,273 @@
     html {
       height: 100%;
       line-height: 1.8;
-      background-color: #ffcfdf;
-      background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+      overflow: hidden;
+
     }
 
     .w3-bar .w3-button {
       padding: 16px;
+      background-color: #2bc54c;
+    }
+
+    .form-group {
+      color: white;
+      width: 100%;
+      border-radius: none;
+    }
+
+    .login-form-grid {
+      width: 100%;
+      display: grid;
+      grid-template-rows: auto auto;
+      align-items: center;
+      grid-gap: 2px;
+    }
+
+    .login-container {
+      height: 420px;
+      width: 350px;
+      justify-content: center;
+      align-items: center;
+      background-color: #30302b;
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 0 25px gray;
+      top: 10vh;
+      left: 15vh;
+      z-index: 1;
+      border-radius: 5%;
+
+
+    }
+
+    .login-form-container {
+      height: 390px;
+      width: 340px;
+      padding: 4px;
+      margin-left: 9px;
+      margin-right: 9px;
+      display: grid;
+      grid-template-rows: 20% 60% 20%;
+
+    }
+
+    .form-control {
+      width: 100%;
+      color: whitesmoke;
+      background: transparent;
+      font-size: 14px;
+      border: transparent;
+      margin-top: 4px;
+      margin-left: 15px;
+      border-bottom: 2px solid whitesmoke;
+
+    }
+
+    .container {
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn {
+      height: 7vh;
+      width: 30vh;
+      margin-left: 12vh;
+      margin-top: 2vh;
+
+      font-size: 18px;
+      background-color: #3a6b35;
+      color: whitesmoke;
+      text-align: center;
+      border-radius: 2px solid green;
+
+      #myNavbar {
+        width: 100%;
+        height: 70px;
+        color: white;
+        background-color: #2bc54c;
+        display: grid;
+        grid-template-columns: auto auto;
+      }
+    }
+
+    .main-login-container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 73px 3px auto;
+    }
+
+
+    input[type="email"],
+    input[type="password"] {
+      width: 90%;
+      height: 28px;
+      box-sizing: border-box;
+      /* display:none; */
+    }
+
+    .form-group label {
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    body,
+    html {
+      height: 100%;
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    #header {
+      height: 70px;
+      width: 100%;
+    }
+
+    .container {
+      padding: 10px 10%;
+    }
+
+    .l-container img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      height: 70px;
+    }
+
+    .logo-container {
+      display: flex;
+    }
+
+    .logo {
+      max-width: 50px;
+      max-height: 50px;
+    }
+
+    .menu-options ul li {
+      margin: 20px;
+    }
+
+    .menu-options ul li :last-child {
+      margin-right: 0;
+    }
+
+    .menu-options ul li a {
+      text-decoration: none;
+    }
+
+
+    .menu-options ul {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+
+    }
+
+    .l-container {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100vw;
     }
   </style>
+</head>
 
 <body>
-  <div class="w3-top">
-    <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <a href="/index" class="w3-bar-item w3-button w3-wide">SHOPPING CART</a>
-      <!-- Right-sided navbar links -->
-      <div class="w3-right w3-hide-small">
-          <a href="/index/signup" class="w3-bar-item w3-button">SIGN UP</a>
-      </div> 
-    </div>
-    <!-- Login Form -->
-    <div class="container" style="width: 500px; height: 800px; margin-top: 20px;">
-      <% if(message.length){ %> 
-        <div style="color: brown; text-align: center;font-size:large ;"><%= message  %> </div>
-        <% } %> 
-      <h1  style= "color: rgb(22, 111, 167); text-align: center;"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-      </svg> Login</h1>
-      <form action="/login/user" method="POST">
-        <div class="form-group">
-          <label for="">Email</label>
-          <input class="form-control" type="email" name="email" placeholder="Email"  autocomplete="off">
+  <div class="main-login-container">
+    <div id="header">
+      <nav class="navbar">
+        <div class="logo-container">
+          <a href="/index"> <img src="/images/FreshCart_Logo.jpg" class="logo" />
+            <span class="company-name"
+              style="color:#3a6b35;text-decoration: none;font-size:18px;margin-right:80px;"><strong>FreshCart</strong></span>
+          </a>
         </div>
-        <div class="form-group">
-          <label for="">Password</label>
-          <input class="form-control" type="password" name="password" placeholder="Password"  autocomplete="off">
-        </div>          
-        <button class="btn btn-primary" type="submit">Login</button>
-      </form>
+        <div class="menu-options">
+          <ul>
+            <li><a href="/index/signup"
+                style="text-decoration:none;color: green;padding-left:143vh;padding-right:10px; font-size: 16px; position: relative;">SIGN
+                UP<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                  class="bi bi-person-plus-fill" viewBox="0 0 13 13">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  <path fill-rule="evenodd"
+                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                </svg></a></li>
+          </ul>
+        </div>
+      </nav>
+
+
     </div>
-    <!-- End of Login Form -->
+    <div class="space" style="background-color: #ffc300;height:3px;"></div>
+
+    <!-- Login Form -->
+    <div class="l-container" style="width: 100%;height:100vh;">
+      <% if(message.length){ %>
+        <div style="color: brown; text-align: center;font-size:large ;">
+          <%= message %>
+        </div>
+        <% } %>
+          <form action="/login/user" method="POST">
+            <img src="/images/gross2.jpg" />
+
+            <div class="login-container">
+              <div class="login-form-container">
+
+                <h1
+                  style="color:whitesmoke; text-align: center;align-items: center;font-family:Arial, Helvetica, sans-serif;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                    class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                    <path fill-rule="evenodd"
+                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                  </svg> Login
+                </h1>
+                <div class="login-form-grid">
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="Password"
+                      autocomplete="off">
+                  </div>
+                </div>
+                <button class="btn" type="submit">Login</button>
+          </form>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- End of Login Form -->
+  </div>
 </body>
+
 </html>
